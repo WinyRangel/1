@@ -1,0 +1,13 @@
+h2{
+  text-align: center;
+  margin-top: 3%;
+  color: black;
+}
+
+hr {
+  color: #004b8d;
+  width:400px;
+  margin: auto;
+  text-align: center;
+  border-top: 5px solid;
+}

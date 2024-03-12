@@ -1,0 +1,28 @@
+body{
+    background-color: #fff;
+    margin-left: 5cm;
+ }
+ 
+ /* Estilos para el mapa del sitio */
+.sitemap ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sitemap ul ul {
+    margin-left: 20px;
+}
+
+.sitemap ul li {
+    margin-bottom: 5px;
+}
+
+.sitemap ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.sitemap ul li a:hover {
+    color: #666;
+}
+

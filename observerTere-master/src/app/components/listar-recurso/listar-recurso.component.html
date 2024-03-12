@@ -1,0 +1,122 @@
+<div id="seccion_header" style="text-align: center;">
+
+  <h2>Gestión de Recursos</h2>
+  <hr>
+
+</div>
+
+
+<div id="cont" class="container mt-5">
+  <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+          <div>
+              <div class="card-body text-center">
+                  <span style="color: black; font-weight: bold" class="titulo">LISTADO DE RECURSOS</span>
+                  <div class="col">
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="filterPost" placeholder="Buscar..."  [(ngModel)]="filterPost">
+                    </div>
+                  </div>
+                  <br>
+
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <a id="Existencias" class="nav-link" [class.active]="mostrarSinFallos" (click)="mostrarDiv('SinFallos')" >Sin Problemas</a>
+                    </li>
+                    <li class="nav-item">
+                      <a id="SinExistencias" class="nav-link" [class.active]="mostrarConFallos" (click)="mostrarDiv('ConFallos')">Con Problemas</a>
+                    </li>
+                  </ul>
+
+                  <div *ngIf="mostrarSinFallos" id="SinFallos">
+                    <br>
+                    <button class="btn btn-success float-end" routerLink="/crear-recurso"  style="background-color: #8dc640;border: #8dc640;"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> NUEVO</button>
+                    <table  class="table table-striped mt-3">
+                        <thead>
+                          <tr>
+                            <th scope="col">Numero de Serie</th>
+                            <th scope="col">Recurso</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Estatus</th>
+                            <th scope="col">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let recurso of listRecursos | filter:filterPost">
+                            <ng-container *ngIf="(recurso.estatus == 'Sin Problemas')">
+                            <td>{{ recurso.numSerie}}</td>
+                            <td>{{ recurso.recurso }}</td>
+                            <td>{{ recurso.marca }}</td>
+                            <td>{{ recurso.modelo}}</td>
+                            <td>{{ recurso.estatus }}</td>
+                            <td [routerLink]="['/editar-recurso', recurso._id]">
+                              <i class="fas fa-edit text-primary"></i>
+                            </td>
+                            <td (click)="eliminarRecurso(recurso._id)" >
+                              <i  class="fas fa-trash text-danger"></i>
+                            </td>
+                            <td [routerLink]="['/eliminar-recurso', recurso._id]">
+                              <i  class="fas fa-solid fa-delete-left text-warning"></i>
+                            </td>
+                          </ng-container>
+                          </tr>
+                        </tbody>
+                  </table>
+                  </div>
+
+
+
+                  <div *ngIf="mostrarConFallos" id="ConFallos">
+                    <table  class="table table-striped mt-3">
+                      <thead>
+                        <tr>
+                          <th scope="col">Numero de Serie</th>
+                          <th scope="col">Recurso</th>
+                          <th scope="col">Marca</th>
+                          <th scope="col">Modelo</th>
+                          <th scope="col">Estatus</th>
+                          <th scope="col">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let recurso of listRecursos | filter:filterPost">
+                          <ng-container *ngIf="(recurso.estatus == 'Con Problemas')">
+                          <td>{{ recurso.numSerie}}</td>
+                          <td>{{ recurso.recurso }}</td>
+                          <td>{{ recurso.marca }}</td>
+                          <td>{{ recurso.modelo}}</td>
+                          <td>{{ recurso.estatus }}</td>
+                          <td [routerLink]="['/edit-recurso', recurso._id]" >
+                            <i class="fas fa-edit text-primary"></i>
+                          </td>
+                          <td (click)="eliminarRecurso(recurso._id)">
+                            <i   class="fas fa-trash text-danger"></i>
+                          </td>
+                        </ng-container>
+                        </tr>
+                      </tbody>
+                  </table>
+                  </div>
+
+
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

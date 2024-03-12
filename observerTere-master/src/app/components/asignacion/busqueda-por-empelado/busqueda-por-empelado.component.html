@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="row">
+    <form [formGroup]="filtroEmpleado" class="row">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input class="form-control" id="nombre" formControlName="nombre">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="apaterno" class="form-label">Apellido Paterno</label>
+            <input class="form-control" id="apaterno" formControlName="aPaterno">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="amaterno" class="form-label">Apellido Materno</label>
+            <input class="form-control" id="amaterno" formControlName="aMaterno">
+          </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="container">
+          <div class="float-sm-end float-md-end float-lg-end float-xl-end float-xxl-end">
+            <button type="submit" class="btn btn-primary" (click)="filtrarEmpleados(filtroEmpleado.value)">Buscar</button>
+          </div>
+        </div>
+    </form>
+    <div class="container mt-5 table-responsive" [hidden]="dataEmpleados.length === 0">
+      <table class="table table-striped">
+        <caption>Empleados</caption>
+        <thead>
+          <tr>
+            <th scope="col">  </th>
+            <th scope="col">Correo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido Paterno</th>
+            <th scope="col">Apellido Materno</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let empleado of dataEmpleados">
+            <td><input type="radio" class="form-check-input" id="empleado{{empleado.idEmpleado}}" name="empleado" (change)="eventEmpleado($event, empleado)"></td>
+            <td>{{ empleado.email }}</td>
+            <td>{{ empleado.nombre }}</td>
+            <td>{{ empleado.aPaterno }}</td>
+            <td>{{ empleado.aMaterno }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row" [hidden]="!isEmpleadoSeleccionado()">
+    <div class="container mt-5 table-responsive" [hidden]="dataRecursos.length === 0">
+      <table class="table table-striped">
+        <caption>Recursos</caption>
+        <thead>
+          <tr>
+            <th scope="col">  </th>
+            <th scope="col">Número Serie</th>
+            <th scope="col">Recurso</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let recurso of dataRecursos">
+            <td *ngIf="!isRecursoAsignado(recurso)">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="asignar"
+                [checked]="recurso.isSeleccionado"
+                (change)="event($event, recurso)">
+            </td>
+            <td *ngIf="isRecursoAsignado(recurso)" data-bs-toggle="tooltip" data-bs-placement="top" title="Recurso asignado a otro empleado">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="asignar"
+                disabled
+                [checked]="recurso.isSeleccionado"
+                (change)="event($event, recurso)">
+            </td>
+            <td>{{ recurso.numSerie }}</td>
+            <td>{{ recurso.recurso }}</td>
+            <td>{{ recurso.marca }}</td>
+            <td>{{ recurso.modelo }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="d-grid gap-1 col-2 mx-auto">
+      <button type="submit" class="btn btn-success btn-sm" [disabled]="!isEmpleadoSeleccionado()" (click)="actualizar()">Actualizar</button>
+    </div>
+  </div>
+</div>

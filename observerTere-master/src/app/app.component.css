@@ -1,0 +1,81 @@
+.b-example-divider {
+  height: 3rem;
+  background-color: rgba(0, 0, 0, .1);
+  border: solid rgba(0, 0, 0, .15);
+  border-width: 1px 0;
+  box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+.form-control-dark {
+  color: #fff;
+  background-color: var(--bs-dark);
+  border-color: var(--bs-gray);
+}
+.form-control-dark:focus {
+  color: #fff;
+  background-color: var(--bs-dark);
+  border-color: #fff;
+  box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
+}
+
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+
+.text-small {
+  font-size: 85%;
+}
+
+.dropdown-toggle {
+  outline: 0;
+}
+
+nav {
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+/* Estilos para el componente breadcrumb */
+
+.breadcrumb {
+  background-color: #f5f5f5; /* Color de fondo */
+  padding: 8px 15px; /* Espaciado interno */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+.breadcrumb-item {
+  display: inline; /* Mostrar los elementos en línea */
+}
+
+.breadcrumb-item:not(:last-child)::after {
+  content: '/'; /* Separador entre elementos */
+  margin-left: 5px; /* Espaciado entre el separador y el elemento siguiente */
+  margin-right: 5px;
+}
+
+.breadcrumb-item a {
+  color: #007bff; /* Color del enlace */
+  text-decoration: none; /* Eliminar subrayado del enlace */
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline; /* Subrayado al pasar el ratón sobre el enlace */
+}
+
+.breadcrumb-item.active {
+  color: #6c757d; /* Color del elemento activo */
+}

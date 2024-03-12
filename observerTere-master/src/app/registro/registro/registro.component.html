@@ -1,0 +1,95 @@
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="card" style="width: 70rem">
+                <div class="card-body text-center">
+                    <span class="tittle">{{ titulo }}</span>
+                    <form class="mt-3" [formGroup]="empleadoForm" (ngSubmit)="crearEmpleado()">
+                        <div class="mb-3">
+                            <label for="marca">Nombre</label>
+                            <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre">
+                            <div class="text-danger" *ngIf="empleadoForm.get('nombre')?.hasError('required') && empleadoForm.get('nombre')?.touched">
+                                <span>El nombre del empleado <strong>ES OBLIGATORIO</strong></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="marca">Apellido Paterno</label>
+                            <input type="text" formControlName="aPaterno" class="form-control" placeholder="Apellido Paterno">
+                            <div class="text-danger" *ngIf="empleadoForm.get('aPaterno')?.hasError('required') && empleadoForm.get('aPaterno')?.touched">
+                                <span>El Apellido  <strong>ES OBLIGATORIO</strong></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="marca">Apellido Materno</label>
+                            <input type="text" formControlName="aMaterno" class="form-control" placeholder="Apellido Materno">
+                            <div class="text-danger" *ngIf="empleadoForm.get('aMaterno')?.hasError('required') && empleadoForm.get('aMaterno')?.touched">
+                                <span>El Apellido  <strong>ES OBLIGATORIO</strong></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="marca">Número de Teléfono</label>
+                            <input type="text" formControlName="telefono" class="form-control" placeholder="Ingresar número de Teléfono" inputmode="numeric" pattern="[0-9]*">
+                            <div class="text-danger" *ngIf="empleadoForm.get('telefono')?.hasError('required') && empleadoForm.get('telefono')?.touched">
+                                <span>Ingresar <strong>NÚMERO DE TELÉFONO</strong> del empleado</span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('telefono')?.hasError('pattern')">
+                                <span>El número de teléfono debe contener solo números</span>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="mb-3">
+                            <label for="marca">Correo electrónico</label>
+                            <input type="email" formControlName="email" class="form-control" placeholder="Correo Electrónico">
+                            <div class="text-danger" *ngIf="empleadoForm.get('email')?.hasError('required') && empleadoForm.get('email')?.touched">
+                                <span>Ingresar  <strong>CORREO ELECTRÓNICO</strong> del empleado</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="marca">Departamento</label>
+                            <select class="form-select" formControlName="departamento" aria-label="Default select example" aria-placeholder="Selecciona el Departamento">
+                                <option selected disabled>Selecciona el Departamento</option>
+                                <option *ngFor="let departamento of departamentos" [value]="departamento.nombre">{{ departamento.nombre }}</option>
+                              </select>
+                            <div class="text-danger" *ngIf="empleadoForm.get('departamento')?.hasError('required') && empleadoForm.get('departamento')?.touched">
+                                <span>Por favor selecciona <strong>EL DEPARTAMENTO DE INGRESO</strong> del empleado</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="marca">Gerente de departamento</label>
+                            <select class="form-select" >
+                                <option selected disabled>Selecciona el Departamento</option>
+                                <option *ngFor="let gerente of gerents" [value]="gerente.gerente">{{ gerente.gerente }}</option>
+                              </select>
+                            <div class="text-danger" *ngIf="empleadoForm.get('gerente')?.hasError('required') && empleadoForm.get('departamento')?.touched">
+                                <span>Por favor selecciona <strong>EL DEPARTAMENTO DE INGRESO</strong> del empleado</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="marca">Puesto</label>
+                            <select class="form-select" formControlName="puesto" aria-label="Default select example">
+                                <option selected>Puesto</option>
+                                <option value="Programador">Programador</option>
+                                <option value="Técnico de TI">"Técnico de TI"</option>
+                                <option value="Ingeniero de SMT">Ingeniero de SMT</option>
+                                <option value="Program Manager">Program Manager</option>
+                                <option value="Gerente de producción">Gerente de producción</option>
+                                <option value="Gerente de planta">Gerente de planta</option>
+                                <option value="Operador de producción">"Operador de producción</option>
+                            </select>
+                            <div class="text-danger" *ngIf="empleadoForm.get('puesto')?.hasError('required') && empleadoForm.get('puesto')?.touched">
+                                <span>Por favor selecciona <strong> EL PUESTO ASIGNADO</strong> del empleado</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button routerLink="/listar-empleados" class="btn btn-danger  btn-lg float-start">CANCELAR</button>
+                            <button type="submit"  style="background-color: #8dc640;border: #8dc640;" id="aceptar" type="submit" class="btn btn-success btn-lg float-end">Aceptar</button>                        
+                        </div>
+                    </form>                    
+            </div>
+        </div>
+    </div>
+</div>

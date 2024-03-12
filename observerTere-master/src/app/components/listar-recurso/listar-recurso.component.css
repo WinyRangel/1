@@ -1,0 +1,38 @@
+h2{
+    text-align: center;
+    margin-top: 3%;
+    color: black;
+}
+
+#seleccion{
+    color: #004b8d;
+}
+
+#Noseleccion{
+    color: black;
+}
+
+th{
+    color: #004b8d;
+}
+
+
+hr {
+    color: #004b8d;
+    width:400px;
+    margin: auto;
+    text-align: center;
+    border-top: 5px solid;
+}
+
+#cont{
+    float: left;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.fas {
+    margin-left: 7px;
+}

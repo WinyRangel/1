@@ -1,0 +1,35 @@
+<!--la pantalla principal de asignacion-->
+<div id="seccion_header" style="text-align: center;">
+
+  <h2>Gestión de Recursos</h2>
+  <hr>
+
+</div>
+
+<div class="col-lg-8 offset-lg-2 mt-5">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a id="Existencias" class="nav-link" [class.active]="!collapseEmpleado" (click)="collapseEmpleado = false">Búsqueda por Empleado</a>
+    </li>
+    <li class="nav-item">
+      <a id="SinExistencias" class="nav-link" [class.active]="collapseEmpleado" (click)="collapseEmpleado = true">Búsqueda por Recurso</a>
+    </li>
+  </ul>
+  <!--botton de asignacion/ es la clase que debe de tomar-->
+  <!-- <div class="container">
+    <button [class.btn-success]="!collapseEmpleado" [class.btn-secondary]="collapseEmpleado" (click)="collapseEmpleado = !collapseEmpleado" class="btn m-2" type="button" data-bs-toggle="collapse" show data-bs-target=".multi-collapse" aria-expanded="true" aria-controls="formRecurso formRecurso">Búsqueda por Empleado</button>
+    <button [class.btn-success]="collapseEmpleado" [class.btn-secondary]="!collapseEmpleado" (click)="collapseEmpleado = !collapseEmpleado" class="btn btn-success m-2" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="formRecurso formRecurso">Búsqueda por Recurso</button>
+  </div> -->
+  <!--habilita la busqueda por empleado y o recurso-->
+  <div class="mt-5" id="formEmpleado" *ngIf="collapseEmpleado">
+    <app-busqueda-por-empelado></app-busqueda-por-empelado>
+  </div>
+  <div class="mt-5" id="formRecurso" *ngIf="!collapseEmpleado">
+    <app-busqueda-por-recurso></app-busqueda-por-recurso>
+  </div>
+  <!-- <div class="collapse multi-collapse" id="formAsignar">
+    <app-asignar></app-asignar>
+  </div> -->
+</div>
+
+<br><br><br>

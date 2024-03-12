@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="row">
+    <form [formGroup]="filtroRecurso" class="row">
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="numSerie" class="form-label">Número Serie</label>
+          <input class="form-control" id="numSerie" formControlName="numSerie">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="recurso" class="form-label">Recurso</label>
+          <input class="form-control" id="recurso" formControlName="recurso">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="marca" class="form-label">Marca</label>
+          <input class="form-control" id="marca" formControlName="marca">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="modelo" class="form-label">Modelo</label>
+          <input class="form-control" id="modelo" formControlName="modelo">
+        </div>
+      </div>
+      <div class="container">
+        <div class="float-sm-end float-md-end float-lg-end float-xl-end float-xxl-end">
+          <button type="submit" class="btn btn-primary" (click)="filtrarRecursos(filtroRecurso.value)">Buscar</button>
+        </div>
+      </div>
+    </form>
+    <div class="container mt-5 table-responsive" [hidden]="dataRecursos.length === 0">
+      <table class="table table-striped">
+        <caption>Recursos</caption>
+        <thead>
+          <tr>
+            <th scope="col">  </th>
+            <th scope="col">Número Serie</th>
+            <th scope="col">Recurso</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Reportar Fallas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let recurso of dataRecursos">
+            <td scope="row"><input type="radio" class="form-check-input" id="asignar{{recurso.numSerie}}" name="radioRecurso" (change)="eventRecurso($event, recurso)"></td>
+            <td scope="row">{{ recurso.numSerie }}</td>
+            <td>{{ recurso.recurso }}</td>
+            <td>{{ recurso.marca }}</td>
+            <td>{{ recurso.modelo }}</td>
+            <td>
+              <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalReporteFallas" (click)="recursoFallido = recurso">
+                <i  class="fas fa-solid fa-bug text-success"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row" [hidden]="!isRecursosSeleccionados()">
+    <div class="container mt-5 table-responsive" [hidden]="dataEmpleados.length === 0">
+      <table class="table table-striped">
+        <caption>Empleados</caption>
+        <thead>
+          <tr>
+            <th scope="col">  </th>
+            <th scope="col">Correo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido Paterno</th>
+            <th scope="col">Apellido Materno</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let empleado of dataEmpleados">
+            <td scope="row"><input type="checkbox" class="form-check-input" id="empleado{{empleado._id}}" name="empleado" [checked]="empleado.isSeleccionado" (change)="eventEmpleado($event, empleado)"></td>
+            <td scope="row">{{ empleado.email }}</td>
+            <td>{{ empleado.nombre }}</td>
+            <td>{{ empleado.aPaterno }}</td>
+            <td>{{ empleado.aMaterno }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="d-grid gap-1 col-2 mx-auto">
+      <button type="submit" class="btn btn-success btn-sm" [disabled]="!isRecursosSeleccionados()" (click)="asignarRecursos()">Actualizar</button>
+    </div>
+  </div>
+</div>
+
+<app-modal-falla [recurso]="recursoFallido" (reportarFalla)="reportarFalla($event)"></app-modal-falla>

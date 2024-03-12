@@ -1,0 +1,83 @@
+
+h2{
+    text-align: center;
+    margin-top: 3%;
+    color: black;
+}
+
+#seleccion{
+    color: #004b8d;
+}
+
+#Noseleccion{
+    color: black;
+}
+
+th{
+    color: #004b8d;
+}
+
+
+hr {
+    color: #004b8d;
+    width:400px;
+    margin: auto;
+    text-align: center;
+    border-top: 5px solid;
+}
+
+#cont{
+    float: left;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.fas {
+    margin-left: 7px;
+}
+
+/* Add this CSS to your styles.css or component-specific styles file */
+
+/* Style the table container */
+.table-responsive {
+    overflow-x: auto;
+  }
+  
+  /* Style the table headers */
+  .table th {
+    font-weight: bold;
+  }
+  
+  /* Style the table rows */
+  .table tbody tr {
+    transition: background-color 0.3s;
+  }
+  
+  /* Add hover effect to table rows */
+  .table tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Style the Actions column icons */
+  .table tbody tr td:last-child i {
+    font-size: 1.2rem;
+    transition: color 0.3s;
+    cursor: pointer;
+    margin-left: 7px;
+  }
+  
+  /* Add hover effect to Actions column icons */
+  .table tbody tr td:last-child i:hover {
+    color: #007bff; /* Change to your preferred color */
+  }
+  
+  /* Style the table on small screens */
+  @media (max-width: 767px) {
+    .table th,
+    .table td {
+      font-size: 0.9rem;
+    }
+  }
+  

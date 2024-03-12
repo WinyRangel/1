@@ -1,0 +1,10 @@
+.wrapper {
+    display: flex;
+}
+.sidebars {
+    width: 4.5rem;
+    flex-shrink: 0;
+}
+.content {
+    flex-grow: 1;
+}

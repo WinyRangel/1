@@ -1,0 +1,83 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">Eliminacion Logica</span>
+                    <form [formGroup]="recursoForm" (ngSubmit)="agregarRecurso()">
+                        <div class="form-group" hidden>
+                          <label for="numSerie">Numero de Serie</label>
+                          <input type="text" id="numSerie" class="form-control" formControlName="numSerie">
+                          <div class="text-danger" *ngIf="recursoForm.get('numSerie')?.hasError('required') && recursoForm.get('numSerie')?.touched">
+                            <span>El numero de serie del recurso <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label for="recurso">Recurso</label>
+                            <input type="text" id="recurso" class="form-control" formControlName="recurso">
+                            <div class="text-danger" *ngIf="recursoForm.get('recurso')?.hasError('required') && recursoForm.get('recurso')?.touched">
+                                <span>La nombre del recurso <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label for="marca">Selecciona la Marca</label>
+                            <select class="form-control" id="marca" formControlName="marca" placeholder="marca" >
+                                <option>Lenovo</option>
+                                <option>Samsung</option>
+                                <option>Apple</option>
+                            </select> 
+                            <div class="text-danger" *ngIf="recursoForm.get('marca')?.hasError('required') && recursoForm.get('marca')?.touched">
+                                <span>La marca del recurso <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label for="modelo">Selecciona el Modelo</label>
+                            <select class="form-control" id="modelo" formControlName="modelo" placeholder="modelo" >
+                                <option>Laptop</option>
+                                <option>Computadora</option>
+                                <option>Auriculares</option>
+                            </select> 
+                            <div class="text-danger" *ngIf="recursoForm.get('modelo')?.hasError('required') && recursoForm.get('modelo')?.touched">
+                                <span>El modelo del recurso <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" id="estatus" class="form-control" formControlName="estatus" value="Existente">
+                        </div>
+                      <br>
+                        <div class="mb-3">
+                          <button routerLink="/listar-recurso" class="btn btn-danger  btn-lg float-start">CANCELAR</button>
+                          <button [disabled]="recursoForm.invalid" style="background-color: #8dc640;border: #8dc640;" id="aceptar" type="submit" class="btn btn-success btn-lg float-end">ACEPTAR</button>
+                      </div>
+                      </form>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+     <button (click)="seleccionarEditar(1)">Editar Opción 1</button>
+     <button (click)="seleccionarEditar2">Editar Opción 2</button>
+ 
+
+
+
+    <div class="form-group">
+                          <label for="privilegios">Privilegios</label>
+                          <br>
+                          <div formArrayName="Privilegios">
+                            <div *ngFor="let privilegio of privilegios.controls; let i = index" class="row mb-3">
+                              <div class="col">
+                                <input type="text" class="form-control" [formControlName]="i" placeholder="Privilegio">
+                              </div>
+                              <div class="col-auto">
+                                <button type="button" class="btn btn-danger" (click)="eliminarPrivilegio(i)">Eliminar</button>
+                              </div>
+                            </div>
+                            <div class="text-center">
+                              <button  style="background-color: #004b8d;border: #004b8d;" type="button" class="btn btn-success" (click)="agregarPrivilegio()">Agregar Privilegio</button>
+                            </div>
+                          </div>
+                        </div>
+
+--> 

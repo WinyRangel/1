@@ -1,0 +1,87 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center">Registrarme</h2>
+            <hr>
+                <form [formGroup]="usuarioForm" (ngSubmit)="registrarUsuario()">
+                    <!---
+                    <div class="form-group">
+                        <input type="file" class="form-control" formControlName="imagen" accept="image/*">
+                        <div class="invalid-feedback" *ngIf="formularioEnviado && usuarioForm.get('imagen')?.invalid">
+                          Debes seleccionar una imagen válida.
+                        </div>
+                      </div>
+
+                    -->
+                    <div class="form-group">
+                      <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+                      <div class="invalid-feedback" *ngIf="formularioEnviado && usuarioForm.get('nombre')?.invalid">
+                        El nombre es requerido.
+                      </div>
+                    </div>
+                  
+                    <div class="form-group">
+                      <input type="email" class="form-control" formControlName="email" placeholder="Correo electrónico">
+                      <div class="invalid-feedback" *ngIf="formularioEnviado && usuarioForm.get('email')?.invalid">
+                        El correo electrónico es requerido.
+                      </div>
+                    </div>
+                  
+                    <div class="form-group">
+                      <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+                      <div class="invalid-feedback" *ngIf="formularioEnviado && usuarioForm.get('password')?.invalid">
+                        La contraseña es requerida.
+                      </div>
+                    </div>
+                  <!--
+                    <div class="form-group">
+                      <input type="text" class="form-control" formControlName="puesto" placeholder="Puesto">
+                      <div class="invalid-feedback" *ngIf="formularioEnviado && usuarioForm.get('puesto')?.invalid">
+                        El puesto es requerido.
+                      </div>
+                    </div>
+                  -->
+                    <button type="submit"class="btn btn-primary btn-block" style="margin-bottom: 12px; text-align: center;">Registrar</button>
+                    <p><i class="fa-solid fa-arrow-left" style="color: #0091ff;"></i> <a class="link-opacity-10-hover" href="/signin">  Iniciar sesion  </a></p>  
+                  </form>
+
+                  <p class="mt-3">{{ mensaje }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+  
+        <!--Modal-->
+        <!-- Modal de registro exitoso -->
+  <div class="modal fade" id="registroExitosoModal" tabindex="-1" aria-labelledby="registroExitosoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registroExitosoModalLabel">Registro exitoso</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¡Tu registro ha sido exitoso!
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal de error de registro -->
+  <div class="modal fade" id="registroErrorModal" tabindex="-1" aria-labelledby="registroErrorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registroErrorModalLabel">Error en el registro</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Hubo un error en el registro. Por favor, inténtalo de nuevo más tarde.
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,35 @@
+<!-- Modal -->
+<div class="modal fade" id="modalReporteFallas" tabindex="-1" aria-labelledby="modalReporteFallas" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalReporteFallas">Reporte de fallas del recurso {{recurso?.recurso}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formFalla" class="row">
+          <div class="mb-3">
+            <label for="numSerie" class="form-label">Número Serie</label>
+            <input class="form-control" style="background-color: #6c757d; color: white" type="text" id="numSerie" formControlName="numSerie" [disabled]=true readonly>
+          </div>
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label for="fchDesde" class="form-label">Desde cuándo</label>
+              <input type="date" class="form-control" id="fchDesde" formControlName="fchDesde">
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3">
+              <label for="descripcion" class="form-label">Descripción de falla</label>
+              <textarea class="form-control" id="descripcion" formControlName="descripcion"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnCancelar">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="guardar()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

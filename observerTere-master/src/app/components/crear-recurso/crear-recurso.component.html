@@ -1,0 +1,56 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo"> {{ titulo | uppercase}} </span>
+                    <form [formGroup]="recursoForm" (ngSubmit)="agregarRecurso()">
+                        <div class="form-group">
+                          <label for="numSerie">Número de Serie</label>
+                          <input type="text" id="numSerie" class="form-control" formControlName="numSerie">
+                          <div class="text-danger" *ngIf="recursoForm.get('numSerie')?.hasError('required') && recursoForm.get('numSerie')?.touched">
+                            <span>El numero de serie del recurso <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="recurso">Recurso</label>
+                            <input type="text" id="recurso" class="form-control" formControlName="recurso">
+                            <div class="text-danger" *ngIf="recursoForm.get('recurso')?.hasError('required') && recursoForm.get('recurso')?.touched">
+                                <span>La nombre del recurso <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="marca">Selecciona la Marca</label>
+                            <select class="form-select" formControlName="marca" aria-label="Default select example" aria-placeholder="Selecciona la Marca">
+                                <option selected disabled>Selecciona la Marca</option>
+                                <option *ngFor="let marca of marcas" [value]="marca.nombre">{{ marca.nombre }}</option>
+                              </select>
+                            <div class="text-danger" *ngIf="recursoForm.get('marca')?.hasError('required') && recursoForm.get('marca')?.touched">
+                                <span>La marca del recurso <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelo">Selecciona la gama</label>
+                            <select class="form-select" formControlName="Gama" aria-label="Default select example" aria-placeholder="Selecciona la Gama">
+                                <option selected disabled>Selecciona la Gama</option>
+                                <option *ngFor="let gama of gamas" [value]="gama.tipo">{{ gama.tipo }}</option>
+                              </select>
+                            <div class="text-danger" *ngIf="recursoForm.get('modelo')?.hasError('required') && recursoForm.get('modelo')?.touched">
+                                <span>El modelo del recurso <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" id="estatus" class="form-control" formControlName="estatus" value="Existente">
+                        </div>
+                      <br>
+                        <div class="mb-3">
+                          <button routerLink="/listar-recurso" class="btn btn-danger btn-lg float-start">CANCELAR</button>
+                          <button style="background-color: #8dc640;border: #8dc640;" id="aceptar" type="submit" class="btn btn-success btn-lg float-end">ACEPTAR</button>
+                      </div>
+                      </form>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
