@@ -8,9 +8,8 @@
 
 <div class="container mt-5">
   <div class="row">
-      <div class="col-lg-4">
-          <div class="card" style="width: 70rem;">
-              <div class="card-body text-center">
+    <div class="col-lg-9 offset-lg-1">
+      <div class="card-body text-center">
                 <span style="color: black; font-weight: bold" class="titulo">LISTADO DE EMPLEADOS</span>
                 <br>
                   <div class="col">
@@ -22,9 +21,9 @@
                     </div>
                     <br>
                   </div>
-                  <div class="table-responsive">
-                    <table *ngIf="listEmpleados.length > 0" class="table table-striped table-hover mt-6 table-sm">
-                        <thead class="thead-dark">
+                  <div  class="table table-striped mt-3">
+                    <table *ngIf="listEmpleados.length > 0">
+                        <thead>
                           <tr>
                             <th scope="col">Nombre</th>
                             <th colspan="2">Apellidos</th>
@@ -37,11 +36,11 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let empleado of listEmpleados |  empleadofilter: filterEmpleado ">
-                            <td>{{empleado.nombre}}</td>
-                            <td>{{empleado.aPaterno}}</td>
-                            <td>{{empleado.aMaterno}}</td>
-                            <td>{{empleado.telefono}}</td>
-                            <td>{{empleado.email}}</td>
+                            <td>{{empleado.nombre}}   </td>
+                            <td>{{empleado.aPaterno}}   </td>
+                            <td>{{empleado.aMaterno}}   </td>
+                            <td>{{empleado.telefono}}   </td>
+                            <td>{{empleado.email}}  </td>
                             <td>{{empleado.departamento}}</td>
                             <td  [routerLink]="['/editar-empleado', empleado._id]">
                               <i class="fa-solid fa-pen-to-square text-success" style="cursor: pointer; margin-left: 7px;"></i>
@@ -54,8 +53,7 @@
                       </table>
                   </div>
                     <h5 style="text-align: start; margin-top: 10px;" *ngIf="listEmpleados.length == 0"> No hay empleados para mostrar</h5>
-              </div>
-          </div>
+      </div>
       </div>
   </div>
 </div>
