@@ -28,15 +28,7 @@ const ProveedorSchema = mongoose.Schema({
     telefono: {
         type: Number,
         require:false
-    },    
-    moneda: {
-        type: String,
-        require:false
-    },    
-    IVA: {
-        type: String,
-        require:false
-    }   
+    }  
 });
 
 module.exports = mongoose.model('Proveedor', ProveedorSchema);

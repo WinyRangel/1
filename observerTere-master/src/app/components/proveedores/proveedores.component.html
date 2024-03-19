@@ -1,0 +1,59 @@
+
+<div id="seccion_header" style="text-align: center;">
+
+    <h2>Gestión de Proveedores</h2>
+    <hr>
+  
+  </div>
+  
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-9 offset-lg-1">
+        <div class="card-body text-center">
+                  <span style="color: black; font-weight: bold" class="titulo">LISTADO DE PROVEEDORES</span>
+                  <br>
+                    <div class="col">
+                      <div class="form-group">
+                        <button class="btn btn-success float-end" routerLink="/registro"  style="background-color: #8dc640;border: #8dc640;"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> NUEVO</button>
+                        <br>
+                        <br>
+                        <input type="text" class="form-control" name="filterProveedor" placeholder="Buscar Proveedor" [(ngModel)]="filterProveedor">
+                      </div>
+                      <br>
+                    </div>
+                    <div  class="table table-striped mt-3">
+                      <table *ngIf="listProveedores.length > 0">
+                          <thead>
+                            <tr>
+                              <th scope="col">Nombre</th>
+                              <th colspan="2">Contacto</th>
+                              <th scope="col">Código comercial</th>
+                              <th scope="col">Código interno</th>
+                              <th scope="col">Dirección</th>
+                              <th scope="col" colspan="2">Actions</th>
+  
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let proveedor of listProveedores | proveedorfilter: filterProveedor">
+                              <td>{{proveedor.nombre}}   </td>
+                              <td>{{proveedor.email}}   </td>
+                              <td>{{proveedor.telefono}}   </td>
+                              <td>{{proveedor.codigoC}}   </td>
+                              <td>{{proveedor.codigoI}}  </td>
+                              <td>{{proveedor.direccion}}</td>
+                              <td  [routerLink]="['/editar-proveedor', proveedor._id]">
+                                <i class="fa-solid fa-pen-to-square text-success" style="cursor: pointer; margin-left: 7px;"></i>
+                              </td>
+                              <td (click)="eliminarProveedor(proveedor._id)">
+                                <i class="fa-solid fa-trash text-danger" style="cursor: pointer; margin-left: 7px;"></i>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                      <h5 style="text-align: start; margin-top: 10px;" *ngIf="listProveedores.length == 0"> No hay empleados para mostrar</h5>
+        </div>
+        </div>
+    </div>
+  </div>

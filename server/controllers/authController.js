@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const axios = require('axios');
 
 exports.registro = async (req, res) => {
   try {
@@ -42,6 +43,9 @@ exports.obtenerUser = async (req, res) =>{
 exports.inicioSesion = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+
+    // Continuar con la autenticación si la validación de reCAPTCHA es exitosa
     const usuario = await User.findOne({ email });
     if (!usuario) {
       return res.status(401).json({ mensaje: 'Credenciales inválidas' });
@@ -54,7 +58,7 @@ exports.inicioSesion = async (req, res) => {
     }
 
     // Generar un token JWT
-    const token = jwt.sign({ usuarioId: usuario._id }, 'secreto', { expiresIn: '1h' }); // Aquí deberías usar un secreto seguro y una expiración adecuada
+    const token = jwt.sign({ usuarioId: usuario._id }, 'secreto', { expiresIn: '120ms' });
 
     res.status(200).json({ mensaje: 'Inicio de sesión exitoso', token });
   } catch (error) {
@@ -64,28 +68,3 @@ exports.inicioSesion = async (req, res) => {
 };
 
 
-
-
-const axios = require('axios');
-
-exports.verificarCaptcha = async (req, res) => {
-  const { secretKey, responseToken } = req.body;
-  
-  try {
-    const response = await axios.post('https://www.google.com/recaptcha/api/siteverify', {
-      secret: secretKey,
-      response: responseToken
-    });
-
-    if (response.data.success) {
-      // Token reCAPTCHA válido, continuar con el proceso de inicio de sesión o registro
-      res.status(200).json({ mensaje: 'Token reCAPTCHA válido' });
-    } else {
-      // Token reCAPTCHA inválido
-      res.status(400).json({ mensaje: 'Token reCAPTCHA inválido' });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensaje: 'Error en el servidor' });
-  }
-};

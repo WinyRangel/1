@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SigninComponent {
   signinForm: FormGroup;
+
   errorMessage: string = '';
 
   constructor(private fb: FormBuilder, private registroService: AuthService, private router: Router) {
@@ -27,6 +28,7 @@ export class SigninComponent {
     const user = {
       email: this.signinForm.get('email')?.value,
       password: this.signinForm.get('password')?.value
+      //recaptchaToken: '' 
     };
 
     this.registroService.inicioSesion(user).subscribe(

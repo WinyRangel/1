@@ -13,12 +13,14 @@ import { Error404Component } from './components/error404/error404/error404.compo
 import { SigninComponent } from './components/signin/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
   { path: '', component: InicioComponent,  canActivate: [AuthGuard], data: { breadcrumb: 'Inicio'}},
   { path: 'inicio', component: InicioComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Inicio'}},
+  { path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Proveedores'}},
   { path: 'mapa', component: MapaComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Mapa del Sitio'}},
   {path: 'listar-empleados', component: ListarEmpleadosComponent,  canActivate: [AuthGuard],  data: { breadcrumb: 'Empleados'}},
   {path: 'registro', component: RegistroComponent,  canActivate: [AuthGuard],  data: { breadcrumb: 'Empleados > Registrar Empleado'}},

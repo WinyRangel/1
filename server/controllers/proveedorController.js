@@ -15,6 +15,18 @@ exports.crearProveedor = async (req, res) => {
     }
 }
 
+exports.obtenerProveedores = async (req, res) =>{
+    console.info('obtenerProveedores')
+
+    try{
+        const proveedor = await Proveedor.find();
+        res.json(proveedor);
+    }catch(error){
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
+
 
 exports.actualizarProveedor = async (req, res) =>{
     console.info('actualizarProveedor')

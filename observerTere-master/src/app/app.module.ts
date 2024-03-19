@@ -35,6 +35,9 @@ import { SearchComponent } from './components/header/search/search.component';
 import { SidebarComponent } from './components/header/sidebar/sidebar.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import { ProveedorfilterPipe } from './pipes/proveedorfilter.pipe';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -63,7 +66,9 @@ import { FooterComponent } from './components/footer/footer.component';
     SearchComponent,
     SidebarComponent,
     ContactoComponent,
-    FooterComponent  ],
+    FooterComponent,
+    ProveedoresComponent,
+    ProveedorfilterPipe  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -72,7 +77,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ToastrModule.forRoot(), // ToastrModule added
     HttpClientModule,
     FormsModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    RecaptchaModule
     ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
