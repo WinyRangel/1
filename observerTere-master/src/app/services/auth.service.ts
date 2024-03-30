@@ -74,9 +74,10 @@ export class AuthService {
   }
   recuperarContrasenas(email: string): Observable<any> {
     return this.http.post<any>(this.urlRecuperarContrasena, { email });
-      }
-      
-  recuperarContrasena(token: string, newPassword: string) {
-    return this.http.post<any>('http://localhost:4000/api/recuperar-contrasena', { token, newPassword });
+  }
+
+  // Esta función espera el token y la nueva contraseña
+  recuperarContrasena(token: string, newPassword: string): Observable<any> {
+    return this.http.post<any>(this.urlRecuperarContrasena + `/${token}`, { newPassword });
   }
 }

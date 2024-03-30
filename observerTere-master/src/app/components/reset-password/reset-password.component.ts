@@ -13,11 +13,7 @@ export class ResetPasswordComponent  {
   newPassword!: string;
   resetUrl!: string;
  
-
   constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router) { }
-
-
-
   recuperarContrasena() {
     // Llamar al método del servicio de autenticación para restablecer la contraseña
     this.authService.recuperarContrasena(this.token, this.newPassword).subscribe(
@@ -30,4 +26,5 @@ export class ResetPasswordComponent  {
       }
     );
   }
+  
 }
