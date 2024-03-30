@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent{
+  darkMode: boolean = false;
+
   usuarioAutenticado: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -24,5 +27,14 @@ export class HeaderComponent{
   }
   isActive(route: string): boolean {
     return this.router.url === route;
+  }
+
+  toggleDarkMode() {
+    this.darkMode = !this.darkMode;
+    if (this.darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
   }
 }

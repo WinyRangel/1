@@ -9,10 +9,6 @@ import { Observable, tap } from 'rxjs';
 export class AuthService {
   /*
   esAdministrador(): boolean {
-    // Aquí puedes agregar la lógica para verificar si el usuario tiene el rol de administrador
-    // Por ejemplo, podrías decodificar el token JWT y verificar el rol almacenado en él
-    // Si el usuario tiene el rol de administrador, devuelve true; de lo contrario, devuelve false
-    // Esto es solo un ejemplo básico, asegúrate de implementar la lógica adecuada según tu backend
     const token = this.getToken();
     if (token) {
       const decodedToken = this.parseJwt(token);
@@ -48,7 +44,6 @@ export class AuthService {
   inicioSesion(user: any): Observable<any> {
     return this.http.post<any>(this.urlInicioSesion, user).pipe(
       tap(response => {
-        // Si la respuesta incluye un token JWT, guárdalo en el localStorage
         if (response.token) {
           localStorage.setItem('token', response.token);
         }
@@ -66,7 +61,7 @@ export class AuthService {
   }
 
   estaAutenticado(): boolean {
-    // Verificar si hay un token en el localStorage
+    // Verifica si hay un token en el localStorage
     return !!localStorage.getItem('token');
   }
   obtenerUsuarios(): Observable<any> {

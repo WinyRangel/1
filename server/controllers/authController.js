@@ -82,26 +82,18 @@ exports.inicioSesion = async (req, res) => {
 // authController.js
 
 
-const resetPasswordEmail = (user, token) => {
-  const resetUrl = `${process.env.BASE_URL}/auth/reset-password/${token}`; 
-  
+function resetPasswordEmail(usuario, token) {
   return `
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <title>Restablecer contraseña</title>
-    </head>
-    <body style="font-family: Arial, sans-serif;">
-      <p>Hola ${user.nombre},</p>
-      <p>Ha solicitado restablecer su contraseña. Haga clic en el siguiente enlace para restablecer su contraseña:</p>
-      <p><a href="${resetUrl}" style="background-color: #007bff; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Restablecer contraseña</a></p>
-      <p>Si no ha solicitado restablecer su contraseña, ignore este correo electrónico.</p>
-      <p>Atentamente,</p>
-      <p>El equipo de soporte.</p>
-    </body>
-  </html>
+    <p>Hola ${usuario.nombre},</p>
+    <p>Has solicitado restablecer tu contraseña. Para restablecerla, haz clic en el siguiente enlace:</p>
+    <a href="http://localhost:4200/reset-password/${token}">Restablecer Contraseña</a>
+    <p>Este enlace expirará en una hora.</p>
+    <p>Si no solicitaste restablecer tu contraseña, puedes ignorar este correo electrónico.</p>
+    <p>Gracias,</p>
+    <p>Tu equipo de aplicación</p>
   `;
-};
+}
+
 
 
 exports.recuperarContrasena = async (req, res) => {

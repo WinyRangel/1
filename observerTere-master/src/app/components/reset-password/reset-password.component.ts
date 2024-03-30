@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.css']
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent  {
   token!: string;
   newPassword!: string;
   resetUrl!: string;
@@ -16,17 +16,7 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-    this.token = this.route.snapshot.params['token'];
-     // Obtener el token de la URL
-     this.route.params.subscribe(params => {
-      const token = params['token'];
-      // Construir la URL de restablecimiento de contraseña
-      this.resetUrl = `http://localhost:4200/recuperar-contrasena/${token}`;
-      // Redirigir automáticamente al enlace de restablecimiento de contraseña
-      this.router.navigateByUrl(this.resetUrl);
-    });
-  }
+
 
   recuperarContrasena() {
     // Llamar al método del servicio de autenticación para restablecer la contraseña

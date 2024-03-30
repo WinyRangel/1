@@ -27,7 +27,7 @@ export class SigninComponent {
     }
 
     const user = {
-      //email: this.signinForm.get('email')?.value,
+      email: this.signinForm.get('email')?.value,
       password: this.signinForm.get('password')?.value,
       username: this.signinForm.get('username')?.value
 

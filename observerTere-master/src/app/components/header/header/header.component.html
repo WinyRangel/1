@@ -11,6 +11,8 @@
         <i class="fa-solid fa-arrow-left" style="color: #0d6efd;"></i>
       </a>
     </li>
+    <button type="button" class="btn" (click)="toggleDarkMode()"><i class="fa-solid fa-moon" ></i>
+    </button>
   </ul>
 </header>
 
@@ -29,7 +31,8 @@
           <li class="d-flex align-items-center"><a [class.active]="isActive('/asignacion')" href="asignacion" class="nav-link px-2 link-secondary">Asignar</a></li>
           <li class="d-flex align-items-center"><a [class.active]="isActive('/productos')" href="productos" class="nav-link px-2 link-secondary">Productos</a></li>
         </ul>
-
+        <button type="button" class="btn" (click)="toggleDarkMode()"><i class="fa-solid fa-moon" ></i>
+        </button>
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>

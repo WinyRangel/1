@@ -38,7 +38,7 @@ const routes: Routes = [
   {path: 'signin', component: SigninComponent, data: { breadcrumb: 'Acceso'}},
   {path: 'signup', component: SignupComponent, data: { breadcrumb: 'Registro'}},
   {path: 'recuperar-contraseña', component: RecuperarContrasenaComponent, data: { breadcrumb: 'Recuperar Contraseña'}},
-  { path: 'recuperar-contrasena/:token', component: ResetPasswordComponent },
+  { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: '**', redirectTo: 'error404'}
 ];
 
