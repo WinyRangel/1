@@ -14,7 +14,7 @@ export class AppComponent implements OnInit{
   title = 'cliente';
   isLoggedIn = false; // Definir la propiedad isLoggedIn como un booleano
 
-  constructor(private authService: AuthService, private TitleService: Title, private BreadcrumbService: BreadcrumbService) {
+  constructor(private authService: AuthService, private TitleService: Title, private BreadcrumbService: BreadcrumbService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -22,7 +22,9 @@ export class AppComponent implements OnInit{
       this.TitleService.setTitle(this.createTitle(crumbs))
     }) 
   }
-
+  estaAutenticado(): boolean {
+    return this.authService.estaAutenticado();
+  }
   private createTitle(routesCollection: Breadcrumb[]){
     const title = 'Angular Demo';
     const titles = routesCollection.filter((route) => route.displayName);
@@ -39,5 +41,7 @@ export class AppComponent implements OnInit{
       return `${displayName} ${prev}`; // Se cambia "-" por " " para separar los títulos con un espacio en lugar de un guion
     }, '');
   }
-
+  isActive(route: string): boolean {
+    return this.router.url === route;
+  }
 }

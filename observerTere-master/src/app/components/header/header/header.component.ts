@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -7,11 +7,22 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent{
+  usuarioAutenticado: boolean = false;
+
   constructor(private authService: AuthService, private router: Router) {}
   
   cerrarSesion() {
     this.authService.cerrarSesion();
     this.router.navigate(['/signin']); // Redirige al usuario a la página de inicio de sesión
+  }
+  estaAutenticado(): boolean {
+    return this.authService.estaAutenticado();
+  }
+    ngOnInit(): void {
+    this.usuarioAutenticado = this.authService.estaAutenticado();
+  }
+  isActive(route: string): boolean {
+    return this.router.url === route;
   }
 }

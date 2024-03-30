@@ -7,6 +7,30 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  /*
+  esAdministrador(): boolean {
+    // Aquí puedes agregar la lógica para verificar si el usuario tiene el rol de administrador
+    // Por ejemplo, podrías decodificar el token JWT y verificar el rol almacenado en él
+    // Si el usuario tiene el rol de administrador, devuelve true; de lo contrario, devuelve false
+    // Esto es solo un ejemplo básico, asegúrate de implementar la lógica adecuada según tu backend
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = this.parseJwt(token);
+      return decodedToken && decodedToken.rol === 'administrador';
+    } else {
+      return false;
+    }
+  }
+  private parseJwt(token: string): any {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      return JSON.parse(window.atob(base64));
+    } catch (error) {
+      return null;
+    }
+  }
+*/
   loggedIn() {
     throw new Error('Method not implemented.');
   }
@@ -15,6 +39,7 @@ export class AuthService {
 
   urlRegistro = 'http://localhost:4000/api/users/registro';
   urlInicioSesion = 'http://localhost:4000/api/users/inicio-sesion';
+  urlRecuperarContrasena = 'http://localhost:4000/api/users/recuperar-contrasena'
 
   registrarUsuario(datosUsuario: any): Observable<any> {
     return this.http.post<any>(this.urlRegistro, datosUsuario);
@@ -51,5 +76,12 @@ export class AuthService {
     });
     
     return this.http.get<any>('http://localhost:4000/api/users/registro', { headers });
+  }
+  recuperarContrasenas(email: string): Observable<any> {
+    return this.http.post<any>(this.urlRecuperarContrasena, { email });
+      }
+      
+  recuperarContrasena(token: string, newPassword: string) {
+    return this.http.post<any>('http://localhost:4000/api/recuperar-contrasena', { token, newPassword });
   }
 }

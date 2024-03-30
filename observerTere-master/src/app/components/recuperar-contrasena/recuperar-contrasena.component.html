@@ -1,0 +1,12 @@
+<form [formGroup]="recuperarContrasenasForm" (ngSubmit)="recuperarContrasena()">
+    <div class="form-group">
+      <input type="email" id="email" class="form-control" formControlName="email" placeholder="Correo electrónico">
+      <div class="invalid-feedback" *ngIf="recuperarContrasenasForm.get('email')?.invalid && recuperarContrasenasForm.get('email')?.touched">
+        Por favor, ingrese un correo electrónico válido.
+      </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary btn-block">Enviar correo electrónico</button>
+  </form>
+  
+  

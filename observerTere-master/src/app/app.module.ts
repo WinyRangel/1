@@ -38,6 +38,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import { ProveedorfilterPipe } from './pipes/proveedorfilter.pipe';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { RecaptchaModule } from 'ng-recaptcha';
     ContactoComponent,
     FooterComponent,
     ProveedoresComponent,
-    ProveedorfilterPipe  ],
+    ProveedorfilterPipe,
+    RecuperarContrasenaComponent,
+    ResetPasswordComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

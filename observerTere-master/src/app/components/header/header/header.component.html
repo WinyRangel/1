@@ -1,4 +1,22 @@
-<header class="p-3 mb-3 border-bottom">
+<header class="p-3 mb-3 border-bottom" *ngIf="!estaAutenticado()">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="isActive('/signin')" href="/signin">Ingresar</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="isActive('/signup')" href="/signup">Registro</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="isActive('/otra-ruta')" href="/otra-ruta">
+        <i class="fa-solid fa-arrow-left" style="color: #0d6efd;"></i>
+      </a>
+    </li>
+  </ul>
+</header>
+
+
+
+<header class="p-3 mb-3 border-bottom"  *ngIf="estaAutenticado()">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -6,10 +24,10 @@
             <a href="inicio"><img src="../assets/Gráfico Cuadro Comparativo Moderno Amarillo (1).png" alt="Logo" style="height: 70px; width: 200px; margin-right: 10rem;"></a>
           </div>
           <div class="vr"></div>
-          <li class="d-flex align-items-center"><a href="listar-empleados" class="nav-link px-2 link-secondary">Empleados</a></li>
-          <li class="d-flex align-items-center"><a href="listar-recurso" class="nav-link px-2 link-secondary">Recursos</a></li>
-          <li class="d-flex align-items-center"><a href="asignacion" class="nav-link px-2 link-secondary">Asignar</a></li>
-          <li class="d-flex align-items-center"><a href="#" class="nav-link px-2 link-secondary">Products</a></li>
+          <li class="d-flex align-items-center"><a [class.active]="isActive('/listar-empleados')" href="listar-empleados" class="nav-link px-2 link-secondary">Empleados</a></li>
+          <li class="d-flex align-items-center"><a [class.active]="isActive('/listar-recurso')" href="listar-recurso" class="nav-link px-2 link-secondary">Recursos</a></li>
+          <li class="d-flex align-items-center"><a [class.active]="isActive('/asignacion')" href="asignacion" class="nav-link px-2 link-secondary">Asignar</a></li>
+          <li class="d-flex align-items-center"><a [class.active]="isActive('/productos')" href="productos" class="nav-link px-2 link-secondary">Productos</a></li>
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

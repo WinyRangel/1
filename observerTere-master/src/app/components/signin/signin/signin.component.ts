@@ -15,7 +15,8 @@ export class SigninComponent {
 
   constructor(private fb: FormBuilder, private registroService: AuthService, private router: Router) {
     this.signinForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      //email: ['', [Validators.required, Validators.email]],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -26,8 +27,10 @@ export class SigninComponent {
     }
 
     const user = {
-      email: this.signinForm.get('email')?.value,
-      password: this.signinForm.get('password')?.value
+      //email: this.signinForm.get('email')?.value,
+      password: this.signinForm.get('password')?.value,
+      username: this.signinForm.get('username')?.value
+
       //recaptchaToken: '' 
     };
 

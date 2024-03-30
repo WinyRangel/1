@@ -14,6 +14,8 @@ import { SigninComponent } from './components/signin/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AuthGuard } from './auth.guard';
 
 
@@ -35,6 +37,8 @@ const routes: Routes = [
   {path: 'error404', component: Error404Component, data: { breadcrumb: 'Error 404'}},
   {path: 'signin', component: SigninComponent, data: { breadcrumb: 'Acceso'}},
   {path: 'signup', component: SignupComponent, data: { breadcrumb: 'Registro'}},
+  {path: 'recuperar-contraseña', component: RecuperarContrasenaComponent, data: { breadcrumb: 'Recuperar Contraseña'}},
+  { path: 'recuperar-contrasena/:token', component: ResetPasswordComponent },
   { path: '**', redirectTo: 'error404'}
 ];
 

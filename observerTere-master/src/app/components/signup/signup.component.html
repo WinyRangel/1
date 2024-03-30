@@ -6,19 +6,20 @@
             <h2 class="card-title text-center">Registrarme</h2>
             <hr>
                 <form [formGroup]="usuarioForm" (ngSubmit)="registrarUsuario()">
-                    <!---
-                    <div class="form-group">
-                        <input type="file" class="form-control" formControlName="imagen" accept="image/*">
-                        <div class="invalid-feedback" *ngIf="formularioEnviado && usuarioForm.get('imagen')?.invalid">
-                          Debes seleccionar una imagen válida.
-                        </div>
-                      </div>
 
-                    -->
                     <div class="form-group">
-                      <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+                      <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre completo">
                       <div class="invalid-feedback" *ngIf="formularioEnviado && usuarioForm.get('nombre')?.invalid">
                         El nombre es requerido.
+                      </div>
+                    </div>
+
+                   
+
+                    <div class="form-group">
+                      <input type="text" class="form-control" formControlName="username" placeholder="Nombre de usuario">
+                      <div class="invalid-feedback" *ngIf="formularioEnviado && usuarioForm.get('username')?.invalid">
+                        El nombre de usuario es requerido.
                       </div>
                     </div>
                   
@@ -31,18 +32,18 @@
                   
                     <div class="form-group">
                       <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
-                      <div class="invalid-feedback" *ngIf="formularioEnviado && usuarioForm.get('password')?.invalid">
+                      <div class="text-danger" *ngIf="usuarioForm.get('password')?.hasError('required') && usuarioForm.get('password')?.touched">
                         La contraseña es requerida.
                       </div>
-                    </div>
-                  <!--
-                    <div class="form-group">
-                      <input type="text" class="form-control" formControlName="puesto" placeholder="Puesto">
-                      <div class="invalid-feedback" *ngIf="formularioEnviado && usuarioForm.get('puesto')?.invalid">
-                        El puesto es requerido.
+                      <div class="text-danger" *ngIf="usuarioForm.get('password')?.hasError('minlength') && usuarioForm.get('password')?.touched">
+                        La contraseña debe tener al menos 6 caracteres.
                       </div>
+                      <div class="text-danger" *ngIf="usuarioForm.get('password')?.hasError('invalidPassword') && usuarioForm.get('password')?.touched">
+                        La contraseña debe contener al menos una mayúscula, una minúscula, un número y un carácter especial.
+                      </div>
+                      
                     </div>
-                  -->
+
                     <button type="submit"class="btn btn-primary btn-block" style="margin-bottom: 12px; text-align: center;">Registrar</button>
                     <p><i class="fa-solid fa-arrow-left" style="color: #0091ff;"></i> <a class="link-opacity-10-hover" href="/signin">  Iniciar sesion  </a></p>  
                   </form>

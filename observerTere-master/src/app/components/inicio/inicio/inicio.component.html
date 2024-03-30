@@ -2,32 +2,57 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="..\assets\Blue and White Modern Advertising Agency Twitter Header.png" class="d-block slider-image" alt="...">
+      <img src="..\assets\banner1.png" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="..\assets\Blue Simple Modern Welcome To Our Gallery Email Header.png" class="d-block slider-image" alt="...">
+      <img src="..\assets\banner2.png" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="..\assets\Blue Modern Inspiration Email Header.png" class="d-block slider-image" alt="...">
+      <img src="..\assets\banner4.png" class="d-block w-100" alt="...">
     </div>
-
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
-<!--
+
+
+
+
+<!----
 <div class="container-fluid">
   <div class="row">
-    <div class="col">
-      <strong><h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl" style="text-align: center;">Bienvenido a ACTUNITY</h1></strong>
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm p-4 mb-4 bg-white rounded">
+          <h1 class="mt-4 text-3xl font-bold text-gray-900 sm:text-5xl text-center">
+            Bienvenido a ACTUNITY, {{ username }}
+          </h1>
+        <p class="text-center text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id orci ac libero aliquet venenatis.</p>
+      </div>
     </div>
-    <div class="col">
-      <img src="https://img.freepik.com/vector-premium/personas-ilustracion-gadgets-personaje-dibujos-animados-mujer-sentada-mesa-leyendo-correo-electronico-escritorio-pantalla-blanco_109722-1597.jpg" alt="" style="width: 300px; height: 300px;">
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm p-4 mb-4 bg-white rounded">
+        <img src="https://img.freepik.com/vector-premium/personas-ilustracion-gadgets-personaje-dibujos-animados-mujer-sentada-mesa-leyendo-correo-electronico-escritorio-pantalla-blanco_109722-1597.jpg" alt="" class="img-fluid rounded">
+      </div>
     </div>
   </div>
 </div>
--->
+---->
+
+
 <div class="botones-container" style="display: flex;">
   <button type="button" class="btn" routerLink="/listar-empleados">
     <i id="ibtn1" class="fa-solid fa-users-gear button-icon" style="color: #ffff;"></i><br>
