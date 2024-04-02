@@ -1,1 +1,9 @@
-<p>search works!</p>
+<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+    <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar" [(ngModel)]="userInput" (input)="filtrarPalabras()">
+  </form>
+  
+  <ul>
+    <li *ngFor="let palabra of palabrasFiltradas">{{ palabra }}</li>
+  </ul>
+  
+  

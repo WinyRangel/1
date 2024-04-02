@@ -40,6 +40,7 @@ import { ProveedorfilterPipe } from './pipes/proveedorfilter.pipe';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { FiltroPorPalabraClavePipePipe } from './components/header/search/filtro-por-palabra-clave-pipe.pipe';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     ProveedoresComponent,
     ProveedorfilterPipe,
     RecuperarContrasenaComponent,
-    ResetPasswordComponent  ],
+    ResetPasswordComponent,
+    FiltroPorPalabraClavePipePipe  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

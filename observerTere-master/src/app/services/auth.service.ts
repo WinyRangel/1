@@ -72,12 +72,13 @@ export class AuthService {
     
     return this.http.get<any>('http://localhost:4000/api/users/registro', { headers });
   }
-  recuperarContrasenas(email: string): Observable<any> {
-    return this.http.post<any>(this.urlRecuperarContrasena, { email });
+  
+  recuperarContrasena(email: string): Observable<any> {
+    return this.http.post<any>('http://localhost:4000/api/users//recuperar-contrasena', { email });
   }
 
-  // Esta función espera el token y la nueva contraseña
-  recuperarContrasena(token: string, newPassword: string): Observable<any> {
-    return this.http.post<any>(this.urlRecuperarContrasena + `/${token}`, { newPassword });
+  cambiarContrasena(token: string, newPassword: string): Observable<any> {
+    return this.http.post<any>('http://localhost:4000/api/users/cambiar-contrasena', { token, newPassword });
   }
+
 }

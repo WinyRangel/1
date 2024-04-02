@@ -25,7 +25,7 @@ export class RecuperarContrasenaComponent implements OnInit {
 
     const email = this.recuperarContrasenasForm.get('email')?.value;
 
-    this.authService.recuperarContrasenas(email).subscribe(
+    this.authService.recuperarContrasena(email).subscribe(
       (response) => {
         alert('Se ha enviado un correo electrónico con las instrucciones para restablecer tu contraseña');
       },

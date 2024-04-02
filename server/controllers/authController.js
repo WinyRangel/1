@@ -79,14 +79,11 @@ exports.inicioSesion = async (req, res) => {
   }
 };
 
-// authController.js
-
-
-function resetPasswordEmail(usuario, token) {
+function resetPasswordEmail(usuario, resetToken) {
   return `
     <p>Hola ${usuario.nombre},</p>
     <p>Has solicitado restablecer tu contraseña. Para restablecerla, haz clic en el siguiente enlace:</p>
-    <a href="http://localhost:4200/reset-password/${token}">Restablecer Contraseña</a>
+    <a href="http://localhost:4200/reset-password/${resetToken}">Restablecer Contraseña</a>
     <p>Este enlace expirará en una hora.</p>
     <p>Si no solicitaste restablecer tu contraseña, puedes ignorar este correo electrónico.</p>
     <p>Gracias,</p>
@@ -114,8 +111,8 @@ exports.recuperarContrasena = async (req, res) => {
       return res.status(404).json({ mensaje: 'Usuario no encontrado' });
     }
 
-    const token = jwt.sign({ usuarioId: usuario._id }, 'secreto', { expiresIn: '1h' });
-    usuario.resetPassword = { token, expires: Date.now() + 3600000 }; // 1 hora de expiración
+    const resetToken = jwt.sign({ usuarioId: usuario._id }, 'secreto', { expiresIn: '1h' });
+    usuario.resetPassword = { resetToken, expires: Date.now() + 3600000 }; // 1 hora de expiración
     await usuario.save();
 
     // Envía el correo electrónico con el enlace de restablecimiento de contraseña
@@ -123,7 +120,7 @@ exports.recuperarContrasena = async (req, res) => {
       from: 'actunity24@gmail.com',
       to: usuario.email,
       subject: 'Restablecer contraseña',
-      html: resetPasswordEmail(usuario, token)
+      html: resetPasswordEmail(usuario, resetToken)
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -140,3 +137,138 @@ exports.recuperarContrasena = async (req, res) => {
     res.status(500).json({ mensaje: 'Error en el servidor' });
   }
 };
+
+// Controlador para cambiar la contraseña
+exports.cambiarContrasena = async (req, res) => {
+  try {
+    const { newPassword, token } = req.body;
+
+    // Verificar si se proporcionó una nueva contraseña y un token válido
+    if (!newPassword || !token) {
+      return res.status(400).json({ mensaje: 'Se requiere una nueva contraseña y un token válido' });
+    }
+
+    // Verificar y decodificar el token
+    const decodedToken = jwt.verify(token, 'secreto');
+
+    // Verificar si el token está expirado
+    if (decodedToken.expires < Date.now()) {
+      return res.status(400).json({ mensaje: 'El token de restablecimiento de contraseña ha expirado' });
+    }
+
+    // Buscar al usuario por su ID
+    const usuario = await User.findById(decodedToken.usuarioId);
+
+    // Verificar si el usuario existe
+    if (!usuario) {
+      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+
+    // Hashear la nueva contraseña antes de almacenarla
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Cambiar la contraseña del usuario
+    usuario.password = hashedPassword;
+    usuario.resetPassword = undefined; // Eliminar el token de reseteo de la contraseña
+    await usuario.save();
+
+    res.status(200).json({ mensaje: 'Contraseña restablecida exitosamente' });
+
+  } catch (error) {
+    console.error(error);
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(400).json({ mensaje: 'Token inválido' });
+    }
+    if (error.name === 'TokenExpiredError') {
+      return res.status(400).json({ mensaje: 'El token de restablecimiento de contraseña ha expirado' });
+    }
+    res.status(500).json({ mensaje: 'Error en el servidor' });
+  }
+};
+
+
+/*authController.js
+exports.resetPassword = async (req, res, next) => {
+  const { token } = req.params;
+  const { newPassword } = req.body;
+
+  try {
+    // Buscar al usuario por el token de reset
+    const usuario = await User.findOne({ 'resetPassword.token': token, 'resetPassword.expires': { $gt: Date.now() } });
+
+    if (!usuario) {
+      return res.status(400).json({ message: 'El token de restablecimiento de contraseña no es válido o ha caducado.' });
+    }
+
+    // Hash de la nueva contraseña
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Actualizar la contraseña y limpiar el token de reset
+    usuario.password = hashedPassword;
+    usuario.resetPassword = undefined; // Aquí actualizamos el campo resetPassword
+    await usuario.save();
+
+    res.status(200).json({ message: 'Contraseña actualizada con éxito.' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+exports.requestPasswordReset = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    // Genera y guarda el token de restablecimiento de contraseña
+    const token = await bcrypt.hash(user.email, 10);
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hora de validez del token
+    await user.save();
+
+    // Envía el correo electrónico con el enlace de restablecimiento de contraseña
+    await transporter.sendMail({
+      to: user.email,
+      subject: 'Solicitud de restablecimiento de contraseña',
+      html: `<p>Haz clic en <a href="http://localhost:4200/reset-password/${token}">este enlace</a> para restablecer tu contraseña.</p>`
+    });
+
+    res.status(200).json({ message: 'Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña.' });
+  } catch (error) {
+    console.error('Error al procesar la solicitud de restablecimiento de contraseña:', error);
+    res.status(500).json({ error: 'Se produjo un error al procesar la solicitud.' });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  const { token, newPassword } = req.body;
+
+  try {
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() } // Verifica que el token no haya caducado
+    });
+
+    if (!user) {
+      return res.status(400).json({ error: 'El token es inválido o ha caducado' });
+    }
+
+    // Actualiza la contraseña del usuario
+    user.password = await bcrypt.hash(newPassword, 10);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.status(200).json({ message: 'La contraseña se ha restablecido correctamente.' });
+  } catch (error) {
+    console.error('Error al restablecer la contraseña:', error);
+    res.status(500).json({ error: 'Se produjo un error al restablecer la contraseña.' });
+  }
+};
+
+*/

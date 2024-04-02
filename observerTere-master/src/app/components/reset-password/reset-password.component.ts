@@ -8,23 +8,39 @@ import { Router } from '@angular/router';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.css']
 })
-export class ResetPasswordComponent  {
+export class ResetPasswordComponent implements OnInit {
   token!: string;
   newPassword!: string;
-  resetUrl!: string;
- 
+
   constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router) { }
-  recuperarContrasena() {
+  
+  ngOnInit(): void {
+    // Obtener el token de la URL
+    this.route.params.subscribe(params => {
+      this.token = params['token'];
+    });
+  }
+
+  cambiarContrasena() {
+    // Validar la nueva contraseña antes de enviar la solicitud
+    if (!this.validarNuevaContrasena(this.newPassword)) {
+      alert('La nueva contraseña no cumple con los requisitos mínimos de seguridad.');
+      return;
+    }
+
     // Llamar al método del servicio de autenticación para restablecer la contraseña
-    this.authService.recuperarContrasena(this.token, this.newPassword).subscribe(
+    this.authService.cambiarContrasena(this.token, this.newPassword).subscribe(
       (response) => {
         alert('Contraseña restablecida correctamente');
-        // Redirigir al usuario a la página de inicio de sesión u otra página de tu aplicación
+        this.router.navigate(['/signin']);
       },
       (error) => {
         alert('Error al restablecer la contraseña. Por favor, intenta nuevamente.');
       }
     );
   }
-  
+
+  validarNuevaContrasena(contrasena: string): boolean {
+    return contrasena.length >= 8;
+  }
 }

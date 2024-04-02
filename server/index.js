@@ -20,6 +20,8 @@ app.use('/api/proveedor', require('./routes/proveedor'))
 
 app.use('/api/marca', require('./routes/marca'))
 app.use('/api/users', require('./routes/auth'));
+app.use('/api/contacto', require ('./routes/contacto'));
+
 
 
 app.use('/', require('./routes/empleado'));
