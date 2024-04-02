@@ -14,8 +14,8 @@ export class CrearRecursoComponent {
   recursoForm: FormGroup;
   titulo = 'Crear recurso';
   id: string | null;
-  marcas: { nombre: string }[] = []; // Ajusta el tipo según la estructura real de tus objetos de departamento
-  gamas: { tipo: string }[] = []; // Ajusta el tipo según la estructura real de tus objetos de departamento
+  marcas: { nombre: string }[] = []; 
+  gamas: { tipo: string }[] = []; 
 
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -41,7 +41,6 @@ export class CrearRecursoComponent {
   loadMarcas() {
     this._recursoService.obtenerMarca().subscribe(
       (marcas: { nombre: string }[]) => {
-        // Actualiza las opciones de departamento en el formulario
         this.marcas = marcas;
       },
       (error) => {

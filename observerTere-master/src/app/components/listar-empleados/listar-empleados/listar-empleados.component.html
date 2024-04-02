@@ -22,35 +22,37 @@
                     <br>
                   </div>
                   <div  class="table table-striped mt-3">
-                    <table *ngIf="listEmpleados.length > 0">
-                        <thead>
-                          <tr>
-                            <th scope="col">Nombre</th>
-                            <th colspan="2">Apellidos</th>
-                            <th scope="col">Teléfono</th>
-                            <th scope="col">Correo Electrónico</th>
-                            <th scope="col">Departamento</th>
-                            <th scope="col" colspan="2">Actions</th>
-
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let empleado of listEmpleados |  empleadofilter: filterEmpleado ">
-                            <td>{{empleado.nombre}}   </td>
-                            <td>{{empleado.aPaterno}}   </td>
-                            <td>{{empleado.aMaterno}}   </td>
-                            <td>{{empleado.telefono}}   </td>
-                            <td>{{empleado.email}}  </td>
-                            <td>{{empleado.departamento}}</td>
-                            <td  [routerLink]="['/editar-empleado', empleado._id]">
-                              <i class="fa-solid fa-pen-to-square text-success" style="cursor: pointer; margin-left: 7px;"></i>
-                            </td>
-                            <td (click)="eliminarEmpleado(empleado._id)">
-                              <i class="fa-solid fa-trash text-danger" style="cursor: pointer; margin-left: 7px;"></i>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Apellidos</th>
+                          <th scope="col">Teléfono</th>
+                          <th scope="col">Correo Electrónico</th>
+                          <th scope="col">Departamento</th>
+                          <th scope="col">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let empleado of listEmpleados | empleadofilter: filterEmpleado">
+                          <td>{{empleado.nombre}}</td>
+                          <td>{{empleado.aPaterno}} {{empleado.aMaterno}}</td>
+                          <td>{{empleado.telefono}}</td>
+                          <td>{{empleado.email}}</td>
+                          <td>{{empleado.departamento}}</td>
+                          <td>
+                            <div class="btn-group">
+                              <a [routerLink]="['/editar-empleado', empleado._id]" class="btn btn-success">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                              </a>
+                              <button (click)="eliminarEmpleado(empleado._id)" class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                     <h5 style="text-align: start; margin-top: 10px;" *ngIf="listEmpleados.length == 0"> No hay empleados para mostrar</h5>
       </div>

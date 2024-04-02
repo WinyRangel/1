@@ -19,12 +19,14 @@ exports.enviarCorreo = async (req, res) => {
     }
   };
 
-  exports.obtenerComentario = async (req, res) => {
-    try{
-        const comentario = await Marca.find({}, 'nombre');
-        res.json(marca)
-    }catch(error){
-        console.log(error);
-        res.status(500).send('Error')
+  exports.obtenerContactos = async (req, res) => {
+    try {
+      // Obtener todos los contactos
+      const contactos = await Contacto.find();
+      res.status(200).json(contactos);
+    } catch (error) {
+      // Manejar errores
+      res.status(500).json({ mensaje: 'Error en el servidor' });
     }
-}
+  };
+  
