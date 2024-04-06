@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-recuperar-contrasena',
@@ -27,7 +28,12 @@ export class RecuperarContrasenaComponent implements OnInit {
 
     this.authService.recuperarContrasena(email).subscribe(
       (response) => {
-        alert('Se ha enviado un correo electrónico con las instrucciones para restablecer tu contraseña');
+        Swal.fire({
+          icon: "success",
+          title: "El correo ha sido enviado con éxito. Por favor, verifica en tu bandeja de entrada.",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (error) => {
         alert('Error al enviar el correo electrónico. Por favor, verifica tu conexión a internet e intenta nuevamente.');

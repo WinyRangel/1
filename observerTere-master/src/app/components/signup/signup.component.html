@@ -44,6 +44,15 @@
                       
                     </div>
 
+                    <div class="form-group">
+                      <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirmar Contraseña">
+                      <div class="text-danger" *ngIf="usuarioForm.get('confirmPassword')?.hasError('required') && usuarioForm.get('confirmPassword')?.touched">
+                        La confirmación de contraseña es requerida.
+                      </div>
+                      <div class="text-danger" *ngIf="usuarioForm.hasError('passwordsNotMatching') && usuarioForm.get('confirmPassword')?.touched">
+                        Las contraseñas no coinciden.
+                      </div>
+                    </div>
                     <button type="submit"class="btn btn-primary btn-block" style="margin-bottom: 12px; text-align: center;">Registrar</button>
                     <p><i class="fa-solid fa-arrow-left" style="color: #0091ff;"></i> <a class="link-opacity-10-hover" href="/signin">  Iniciar sesion  </a></p>  
                   </form>

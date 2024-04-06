@@ -81,13 +81,76 @@ exports.inicioSesion = async (req, res) => {
 
 function resetPasswordEmail(usuario, resetToken) {
   return `
-    <p>Hola ${usuario.nombre},</p>
-    <p>Has solicitado restablecer tu contraseña. Para restablecerla, haz clic en el siguiente enlace:</p>
-    <a href="http://localhost:4200/reset-password/${resetToken}">Restablecer Contraseña</a>
-    <p>Este enlace expirará en una hora.</p>
-    <p>Si no solicitaste restablecer tu contraseña, puedes ignorar este correo electrónico.</p>
-    <p>Gracias,</p>
-    <p>Tu equipo de aplicación</p>
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer Contraseña</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 0 20px;
+      }
+      .header {
+        background-color: #007bff;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      .content {
+        padding: 20px;
+        background-color: #ffffff;
+      }
+      .footer {
+        padding: 20px;
+        text-align: center;
+        background-color: #007bff;
+        color: #fff;
+  
+      }
+      a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .img-container {
+          text-align: center;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Restablecer Contraseña</h2>
+      </div>
+      <div class="content">
+        <p>Hola ${usuario.nombre},</p>
+        <p>Has solicitado restablecer tu contraseña. Para restablecerla, haz clic en el siguiente botón:</p>
+        <button type="button" class="btn btn-outline-light"><p><a href="http://localhost:4200/reset-password/${resetToken}">Restablecer Contraseña</a></p></button>
+        <p>Este enlace expirará en una hora.</p>
+        <p>Si no solicitaste restablecer tu contraseña, puedes ignorar este correo electrónico.</p>
+        <div class="img-container">
+          <img src="https://www.edenred.es/wp-content/uploads/2022/03/ImagenBlog_1.jpg" width="250">
+        </div>
+      </div>
+      
+      <div class="footer">
+        <h3>Gracias, tu equipo de ACTUNITY</h3>
+      </div>
+    </div>
+  </body>
+  </html>
+  
   `;
 }
 

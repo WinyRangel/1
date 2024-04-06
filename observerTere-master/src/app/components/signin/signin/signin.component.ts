@@ -2,14 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent {
   signinForm: FormGroup;
+  passwordVisible: boolean = false;
+
+
 
   errorMessage: string = '';
 
@@ -36,13 +41,23 @@ export class SigninComponent {
 
     this.registroService.inicioSesion(user).subscribe(
       (response) => {
-        // Manejar la respuesta del servidor
-        alert("Inicio de sesión exitoso");
+        Swal.fire({
+          title: "Inicio de sesión exitoso",
+          icon: "success"
+        });
         this.router.navigate(['/inicio']); // Redirigir a la página de inicio
       },
       (error) => {
-        this.errorMessage = 'Error en el inicio de sesión. Por favor, verifica tus credenciales.';
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Parece que ha habido un error con tus credenciales. Por favor, verifica nuevamente.",
+        });
       }
     );
+  }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
   }
 }

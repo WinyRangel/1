@@ -1,0 +1,73 @@
+<div class="card">
+  <div class="card-body">
+    <div class="container text-center">
+      <div class="row">
+        <!--Tabla inicio-->
+        <div class="form-group mb-0">
+          <input type="text" class="form-control" name="filterPost" placeholder="Buscar..." [(ngModel)]="filterPost">
+        </div>
+          <table class="table table-striped mt-3" style="text-align: center;">
+            <thead>
+              <tr style="text-align: center;">
+                <th scope="col">Articulo</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Estatus</th>
+                <th rowspan="3" style="text-align: center;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let recurso of listRecursos">
+                  <td>{{ recurso.recurso }}</td>
+                  <td>{{ recurso.marca }}</td>
+                  <td>{{ recurso.estatus }}</td>
+                  <td>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                      <i class="fa-solid fa-list-check"></i></button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        <!--Tabla fin-->
+
+        <div class="alert alert-secondary" role="alert">
+          Te recordamos que solo es posible solicitar un recurso por solicitud, en caso de que requieras algo más por favor vuelve a llenar la solicitud
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Solicitar</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="solicitudForm" (ngSubmit)="solicitarRecurso()">
+          <label for="empleado" class="form-label">Credencial de empleado</label>
+          <select formControlName="nombre" class="form-select" aria-label="Default select example">
+            <option selected disabled>Seleccione su credencial de empleado</option>
+            <option *ngFor="let empleado of empleados" [value]="empleado.nombre">{{ empleado.nombre }}</option>
+          </select>
+          <div class="mb-3">
+            <label for="cantidad" class="form-label">Insertar cantidad</label>
+            <input formControlName="cantidad" type="number" class="form-control" id="cantidad" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="descripcion" class="form-label">Escribe la razón por la cual solicitas el producto</label>
+            <textarea formControlName="comentario" class="form-control" id="descripcion" aria-describedby="emailHelp"></textarea>
+          </div>
+          <button type="submit" class="btn btn-success" style="margin-right: 12px;">Enviar solicitud</button>
+          <button type="button" class="btn btn-danger bottom-0 end-0" data-bs-dismiss="modal">Cancelar</button>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>

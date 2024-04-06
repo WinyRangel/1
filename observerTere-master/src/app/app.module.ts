@@ -41,6 +41,9 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { FiltroPorPalabraClavePipePipe } from './components/header/search/filtro-por-palabra-clave-pipe.pipe';
+import { ProductosComponent } from './components/productos/productos.component';
+import { RecursoComponent } from './components/recurso/recurso.component';
+import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
 
 
 @NgModule({
@@ -74,7 +77,10 @@ import { FiltroPorPalabraClavePipePipe } from './components/header/search/filtro
     ProveedorfilterPipe,
     RecuperarContrasenaComponent,
     ResetPasswordComponent,
-    FiltroPorPalabraClavePipePipe  ],
+    FiltroPorPalabraClavePipePipe,
+    ProductosComponent,
+    RecursoComponent,
+    SolicitudesComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -84,8 +90,7 @@ import { FiltroPorPalabraClavePipePipe } from './components/header/search/filtro
     HttpClientModule,
     FormsModule,
     BreadcrumbModule,
-    RecaptchaModule
-    ],
+    RecaptchaModule    ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
 })

@@ -1,9 +1,7 @@
-<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-    <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar" [(ngModel)]="userInput" (input)="filtrarPalabras()">
+<div ng-app="myApp" ng-controller="SearchController">
+  <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" ng-submit="search(keyword)">
+    <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar" ng-model="keyword">
   </form>
-  
-  <ul>
-    <li *ngFor="let palabra of palabrasFiltradas">{{ palabra }}</li>
-  </ul>
+</div>
   
   

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { passwordValidator } from '../signup/validators'; // Importa la función de validación desde el archivo validators.ts
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reset-password',
@@ -31,15 +34,24 @@ export class ResetPasswordComponent implements OnInit {
     // Llamar al método del servicio de autenticación para restablecer la contraseña
     this.authService.cambiarContrasena(this.token, this.newPassword).subscribe(
       (response) => {
-        alert('Contraseña restablecida correctamente');
+        Swal.fire({
+          icon: "success",
+          text: "Contraseña restablecida exitosamente",
+        });
         this.router.navigate(['/signin']);
       },
       (error) => {
-        alert('Error al restablecer la contraseña. Por favor, intenta nuevamente.');
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "¡Ha ocurrido un error!",
+          footer: 'Es posible que el token haya caducado'
+        });
       }
     );
   }
 
+  
   validarNuevaContrasena(contrasena: string): boolean {
     return contrasena.length >= 8;
   }

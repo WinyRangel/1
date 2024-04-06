@@ -17,7 +17,8 @@ app.use('/api/empleado', require('./routes/empleado'));
 app.use('/api/departamento', require('./routes/departamento'))
 app.use('/api/gama', require('./routes/gama'))
 app.use('/api/proveedor', require('./routes/proveedor'))
-
+app.use('/api/producto', require('./routes/producto'));
+app.use('/api/solicitud/', require('./routes/solicitud'))
 app.use('/api/marca', require('./routes/marca'))
 app.use('/api/users', require('./routes/auth'));
 app.use('/api/contacto', require ('./routes/contacto'));

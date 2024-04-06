@@ -12,4 +12,5 @@ export class SidebarComponent {
   estaAutenticado(): boolean {
     return this.authService.estaAutenticado();
   }
+  
 }

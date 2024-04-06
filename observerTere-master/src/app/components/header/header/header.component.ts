@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -16,6 +17,14 @@ export class HeaderComponent{
   constructor(private authService: AuthService, private router: Router) {}
   
   cerrarSesion() {
+    Swal.fire({
+      title: "Regresa pronto!",
+      text: "ACTUNITY te desea un buen día",
+      imageUrl: "https://i.gifer.com/W1ph.gif",
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: "Custom image"
+    });
     this.authService.cerrarSesion();
     this.router.navigate(['/signin']); // Redirige al usuario a la página de inicio de sesión
   }

@@ -1,6 +1,8 @@
 const Recurso = require("../models/recurso.js");
 const { transporter } = require('../nodemailer.js'); // Ajusta la ruta según tu estructura de carpetas
 const Empleado = require("../models/Empleado.js"); // Ajusta la ruta según tu estructura de carpetas
+const Solicitud = require("../models/Solicitud.js"); // Ajusta la ruta según tu estructura de carpetas
+const recurso = require("../models/recurso.js");
 
 
 exports.crearRecurso = async (req, res) => {
@@ -77,22 +79,6 @@ exports.actualizarRecurso = async (req, res) => {
     }
 }
 
-exports.obtenerRecursoID = async (req,res) => {
-
-    try {
-        let vrecurso = await Recurso.findById(req.params.id);
-
-        if(!vrecurso){
-            res.status(404).json({msg: 'Recurso inexistente'})
-        }
-        
-        res.json(vrecurso);
-
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Hubo un error');
-    }
-}
 
 exports.eliminarRecurso = async (req,res) => {
 
@@ -235,3 +221,117 @@ exports.reportarFallas = async (req, res) => {
         res.status(500).send({mensaje: 'Hubo un error'})
     }
 }
+
+
+exports.solicitarRecurso = async (req, res) => {
+    try {
+      const { recurso, cantidadSolicitada } = req.body;
+      const recursoEnAlmacen = await Recurso.findOne({ recurso });
+  
+      if (!recursoEnAlmacen) {
+        return res.status(404).json({ message: 'Recurso no encontrado en el almacén' });
+      }
+  
+      if (recursoEnAlmacen.cantidadAlmacen < cantidadSolicitada) {
+        return res.status(400).json({ message: 'No hay suficientes recursos en el almacén' });
+      }
+  
+      // Asignar recurso al empleado
+      recursoEnAlmacen.cantidadAlmacen -= cantidadSolicitada;
+      recursoEnAlmacen.asignadoA = req.user.id; // Suponiendo que tienes la información del usuario en el objeto de solicitud
+  
+      await recursoEnAlmacen.save();
+  
+      res.status(200).json({ message: 'Recurso asignado correctamente' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error interno del servidor' });
+    }
+  };
+
+  exports.solicitarRecurso = async (req, res) => {
+    try {
+        const { idEmpleado, nombre, recurso, marca, comentario, estado } = req.body;
+
+        // Crear una nueva solicitud con el estado "En revisión"
+        const nuevaSolicitud = new Solicitud({
+            idEmpleado,
+            nombre,
+            recurso,
+            marca,
+            comentario,
+            estado: "En revisión"
+        });
+
+        // Guardar la solicitud en la base de datos
+        await nuevaSolicitud.save();
+
+        res.status(200).json({ message: 'Solicitud enviada correctamente' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
+
+// Obtener todas las solicitudes
+exports.obtenerSolicitudes = async (req, res) => {
+    try {
+    
+    const solicitudes = await Solicitud.find();
+    res.status(200).json(solicitudes);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ mensaje: 'Error interno del servidor' });
+    }
+  };
+  
+  // Obtener una solicitud por su ID
+  exports.obtenerSolicitudPorId = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const solicitud = await Solicitud.findById(id);
+      if (!solicitud) {
+        return res.status(404).json({ mensaje: 'Solicitud no encontrada' });
+      }
+      res.status(200).json(solicitud);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ mensaje: 'Error interno del servidor' });
+    }
+  };
+
+  exports.aprobarSolicitud = async (req, res) => {
+    try {
+      const solicitudId = req.params.id; // 
+      const solicitud = await Solicitud.findById(solicitudId); 
+  
+      if (!solicitud) {
+        return res.status(404).json({ message: 'Solicitud no encontrada' });
+      }
+        solicitud.estado = 'Aceptada';
+      await solicitud.save();
+  
+      return res.status(200).json({ message: 'Solicitud aceptada exitosamente' });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error interno del servidor' });
+    }
+  };
+
+  exports.rechazarSolicitud = async (req, res) => {
+    try {
+      const solicitudId = req.params.id; // 
+      const solicitud = await Solicitud.findById(solicitudId); 
+  
+      if (!solicitud) {
+        return res.status(404).json({ message: 'Solicitud no encontrada' });
+      }
+        solicitud.estado = 'Rechazada';
+      await solicitud.save();
+  
+      return res.status(200).json({ message: 'Solicitud rechazada exitosamente' });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error interno del servidor' });
+    }
+  };

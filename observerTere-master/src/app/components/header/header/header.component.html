@@ -27,13 +27,14 @@
           </div>
           <div class="vr"></div>
           <li class="d-flex align-items-center"><a [class.active]="isActive('/listar-empleados')" href="listar-empleados" class="nav-link px-2 link-secondary">Empleados</a></li>
-          <li class="d-flex align-items-center"><a [class.active]="isActive('/listar-recurso')" href="listar-recurso" class="nav-link px-2 link-secondary">Recursos</a></li>
+          <li class="d-flex align-items-center"><a [class.active]="isActive('/listar-recurso')" href="listar-recurso" class="nav-link px-2 link-secondary">Almacén</a></li>
           <li class="d-flex align-items-center"><a [class.active]="isActive('/asignacion')" href="asignacion" class="nav-link px-2 link-secondary">Asignar</a></li>
           <li class="d-flex align-items-center"><a [class.active]="isActive('/productos')" href="productos" class="nav-link px-2 link-secondary">Productos</a></li>
+          <li class="d-flex align-items-center"><a [class.active]="isActive('/solicitudes')" href="solicitudes" class="nav-link px-2 link-secondary">Solicitudes</a></li>
         </ul>
         <button type="button" class="btn" (click)="toggleDarkMode()"><i class="fa-solid fa-moon" ></i>
         </button>
-
+        <span> </span>
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="../assets/avatar.png" alt="mdo" width="23" height="23" >
@@ -42,8 +43,8 @@
             <!--
             <li><a class="dropdown-item" href="#">New project...</a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            -->
+             -->
+           
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" (click)="cerrarSesion()">Cerrar sesión</a></li>
           </ul>

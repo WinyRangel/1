@@ -13,6 +13,10 @@ const RecursoSchema = mongoose.Schema({
     gama: {
         type: String,
     },
+    cantidadAlmacen: {
+        type: Number,
+        default: 0  // Inicialmente, no hay recursos en el almacén
+    },
     estatus: {
         type: String,
         require: false
@@ -33,7 +37,6 @@ const RecursoSchema = mongoose.Schema({
         type: String,
         require: true
     }
-
 });
 
 module.exports = mongoose.model('Recurso', RecursoSchema);

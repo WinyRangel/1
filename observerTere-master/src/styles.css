@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css'
+
 /* Estilos para el modo claro */
 
 *{
@@ -7,10 +8,10 @@
     color: #000000;
   }
   
-  /* Estilos para el modo oscuro */
+  /* Estilos para el modo oscuro 
   .dark-mode * {
     background-color: #000000;
     color: #ffffff;
-
   }
-  
+
+  */

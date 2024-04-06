@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 
@@ -20,7 +21,7 @@ export class RegistroComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private router: Router,
     private _empleadoService: EmpleadoService,
-    private aRouter: ActivatedRoute){
+    private aRouter: ActivatedRoute, private toastr: ToastrService){
     
       this.empleadoForm = this.fb.group ({
       nombre: ['', Validators.required],
@@ -85,7 +86,7 @@ export class RegistroComponent implements OnInit {
     if('Editar Empleado' === this.titulo) {
       if(this.id != null) {
         this._empleadoService.actualizarEmpleado(this.id, EMPLEADO).subscribe(data =>{
-          alert('Empleado actualizado con exito!');
+          this.toastr.success('Empleado actualizado con exito!');
           this.router.navigate(['/listar-empleado'])
           this.empleadoForm.reset();
         }, error => {
@@ -94,8 +95,8 @@ export class RegistroComponent implements OnInit {
       }
     } else {
       this._empleadoService.crearEmpleado(EMPLEADO).subscribe(data =>{
-        alert('Empleado agregado con exito!');
-        this.router.navigate(['/listar-empleado'])
+        this.toastr.success('Empleado agregado con exito');
+        this.router.navigate(['/listar-empleados'])
       }, error => {
         this.empleadoForm.reset();
         alert(error);

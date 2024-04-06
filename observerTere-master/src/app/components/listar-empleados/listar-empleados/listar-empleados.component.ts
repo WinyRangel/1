@@ -1,7 +1,9 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listar-empleados',
@@ -13,7 +15,7 @@ export class ListarEmpleadosComponent implements OnInit{
   filterEmpleado = '';
   
 
-  constructor(private _empleadoService: EmpleadoService) { }
+  constructor(private _empleadoService: EmpleadoService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.obtenerEmpleados();
@@ -28,13 +30,26 @@ export class ListarEmpleadosComponent implements OnInit{
     })
   }
 
-  eliminarEmpleado(id: any) {
-    const confirmacion = window.confirm('¿Estás seguro de que deseas eliminar este empleado?');
-  
-    if (confirmacion) {
+  eliminarEmpleado(id: any) {  
       this._empleadoService.eliminarEmpleado(id).subscribe(
         data => {
-          alert('Empleado Eliminado');
+          Swal.fire({
+            title: "¿Estás seguro de querer eliminar a este empleado?",
+            text: "Esta acción no puede ser revertidad",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, estoy seguro."
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Eliminado",
+                text: "Este empleado ha sido eliminado.",
+                icon: "success"
+              });
+            }
+          });
           this.obtenerEmpleados();
         },
         error => {
@@ -43,7 +58,4 @@ export class ListarEmpleadosComponent implements OnInit{
       );
     }
   }
-  
 
-  
-}
