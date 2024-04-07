@@ -69,8 +69,7 @@ exports.inicioSesion = async (req, res) => {
       return res.status(401).json({ mensaje: 'Credenciales inválidas' });
     }
 
-    // Generar un token JWT
-    const token = jwt.sign({ usuarioId: usuario._id }, 'secreto', { expiresIn: '120ms' });
+    const token = jwt.sign({ usuarioId: usuario._id }, 'secreto', { expiresIn: '120s' });
 
     res.status(200).json({ mensaje: 'Inicio de sesión exitoso', token });
   } catch (error) {

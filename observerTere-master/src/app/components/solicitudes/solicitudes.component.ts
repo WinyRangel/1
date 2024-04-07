@@ -11,25 +11,28 @@ import Swal from 'sweetalert2';
 })
 export class SolicitudesComponent {
   solicitudes: Solicitud[] = [];
+  solicitudesPendientes: Solicitud[] = [];
+  solicitudesAprobadas: Solicitud[] = [];
+  solicitudesRechazadas: Solicitud[] = [];
   mostrarPendientes: boolean = false;
-  mostrarAceptadas: boolean = false;
-  mostrarRechazadas : boolean = false;
-
+  mostrarAprobadas: boolean = false;
+  mostrarRechazadas: boolean = false;
   mostrarDiv(opcion: string) {
-      if (opcion === 'Pendientes') {
-          this.mostrarPendientes = true;
-          this.mostrarAceptadas = false;
-          this.mostrarAceptadas = false;
-      } else if (opcion === 'Aceptadas') {
-          this.mostrarPendientes = false;
-          this.mostrarRechazadas = false;
-          this.mostrarAceptadas = true;
-      } else if (opcion === 'Rechazadas'){
-        this.mostrarPendientes = false;
-        this.mostrarRechazadas = true;
-        this.mostrarAceptadas = false;      
-      }
+    if (opcion === 'Pendientes') {
+      this.mostrarPendientes = true;
+      this.mostrarAprobadas = false;
+      this.mostrarRechazadas = false;
+    } else if (opcion === 'Aprobadas') {
+      this.mostrarPendientes = false;
+      this.mostrarAprobadas = true;
+      this.mostrarRechazadas = false;
+    } else if (opcion === 'Rechazadas') {
+      this.mostrarPendientes = false;
+      this.mostrarAprobadas = false;
+      this.mostrarRechazadas = true;
+    }
   }
+  
 
 
   constructor(private _recursoService: RecursoService, private toastr: ToastrService) { }
@@ -49,6 +52,9 @@ export class SolicitudesComponent {
   aprobarSolicitud(solicitud: Solicitud) {
     this._recursoService.aprobarSolicitud(solicitud).subscribe(
       (response) => {
+        this.solicitudesPendientes = this.solicitudesPendientes.filter(s => s._id !== solicitud._id);
+        this.solicitudesAprobadas.push(solicitud);
+        this.mostrarDiv('Aceptadas');
         console.log(response);
         Swal.fire({
           icon: "success",
@@ -66,9 +72,13 @@ export class SolicitudesComponent {
       }
     );
   }
+
   rechazarSolicitud(solicitud: Solicitud) {
     this._recursoService.rechazarSolicitud(solicitud).subscribe(
       (response) => {
+        this.solicitudesPendientes = this.solicitudesPendientes.filter(s => s._id !== solicitud._id);
+        this.solicitudesRechazadas.push(solicitud);
+        this.mostrarDiv('Rechazadas');
         console.log('Solicitud rechazada con éxito:', response);
         Swal.fire({
           icon: "error",

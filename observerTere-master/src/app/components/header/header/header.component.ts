@@ -20,7 +20,7 @@ export class HeaderComponent{
     Swal.fire({
       title: "Regresa pronto!",
       text: "ACTUNITY te desea un buen día",
-      imageUrl: "https://i.gifer.com/W1ph.gif",
+      imageUrl: "https://i.pinimg.com/originals/74/09/3b/74093b39826557182c1fb8448a630639.gif",
       imageWidth: 400,
       imageHeight: 200,
       imageAlt: "Custom image"

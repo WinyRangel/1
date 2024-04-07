@@ -1,10 +1,10 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-lg-6">
-        <div class="card">
+        <div class="card mx-auto shadow-lg rounded"> <!-- Añadida la clase shadow-lg y rounded para un efecto de sombra y esquinas redondeadas -->
           <div class="card-body">
-            <h2 class="card-title text-center">Registrarme</h2>
-            <hr>
+            <h2 class="card-title text-center mb-4">Registrarme</h2>
+            <hr class="my-4">
                 <form [formGroup]="usuarioForm" (ngSubmit)="registrarUsuario()">
 
                     <div class="form-group">
@@ -31,8 +31,13 @@
                     </div>
                   
                     <div class="form-group">
-                      <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
-                      <div class="text-danger" *ngIf="usuarioForm.get('password')?.hasError('required') && usuarioForm.get('password')?.touched">
+                      <div class="input-group">           
+                        <input [type]="passwordVisible ? 'text' : 'password'" id="password" class="form-control" formControlName="password" placeholder="Contraseña">
+                        <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+                          <i [class]="passwordVisible ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i> <!-- Cambiado el ícono del ojo -->
+                        </button>
+                      </div>
+                        <div class="text-danger" *ngIf="usuarioForm.get('password')?.hasError('required') && usuarioForm.get('password')?.touched">
                         La contraseña es requerida.
                       </div>
                       <div class="text-danger" *ngIf="usuarioForm.get('password')?.hasError('minlength') && usuarioForm.get('password')?.touched">
@@ -41,11 +46,15 @@
                       <div class="text-danger" *ngIf="usuarioForm.get('password')?.hasError('invalidPassword') && usuarioForm.get('password')?.touched">
                         La contraseña debe contener al menos una mayúscula, una minúscula, un número y un carácter especial.
                       </div>
-                      
                     </div>
 
                     <div class="form-group">
+                      <div class="input-group">           
                       <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirmar Contraseña">
+                      <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+                        <i [class]="passwordVisible ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i> <!-- Cambiado el ícono del ojo -->
+                      </button>
+                    </div>
                       <div class="text-danger" *ngIf="usuarioForm.get('confirmPassword')?.hasError('required') && usuarioForm.get('confirmPassword')?.touched">
                         La confirmación de contraseña es requerida.
                       </div>

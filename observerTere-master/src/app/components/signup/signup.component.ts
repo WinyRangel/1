@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   usuarioForm: FormGroup;
   mensaje: string = '';
   formularioEnviado: boolean = false; // Variable para controlar si el formulario ha sido enviado
+  passwordVisible: boolean = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.usuarioForm = this.fb.group({
@@ -22,9 +23,9 @@ export class SignupComponent implements OnInit {
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), passwordValidator()]],
-      confirmPassword: ['', Validators.required] // Agrega el campo de confirmación de contraseña
+      confirmPassword: ['', Validators.required] 
     }, {
-      validators: this.passwordMatchValidator // Validador personalizado para confirmar que las contraseñas coincidan
+      validators: this.passwordMatchValidator
     });
   }
   ngOnInit(): void {
@@ -46,7 +47,6 @@ export class SignupComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
-        // Limpiar el formulario después del registro exitoso
         this.usuarioForm.reset();
         this.formularioEnviado = false; // Reiniciar el estado del formulario enviado
       },
@@ -61,17 +61,21 @@ export class SignupComponent implements OnInit {
       }
     );
   }
-
-  // Validador personalizado para confirmar que las contraseñas coincidan
 passwordMatchValidator(form: FormGroup) {
   const password = form.get('password');
   const confirmPassword = form.get('confirmPassword');
 
-  if (password?.value !== confirmPassword?.value) { // Uso del operador de navegación segura (?.)
+  if (password?.value !== confirmPassword?.value) { 
     confirmPassword?.setErrors({ passwordsNotMatching: true });
+        confirmPassword?.setErrors({ passwordsNotMatching: true });
+
   } else {
+    
     confirmPassword?.setErrors(null);
+
   }
 }
-
+togglePasswordVisibility(): void {
+  this.passwordVisible = !this.passwordVisible;
+}
 }
