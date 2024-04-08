@@ -72,7 +72,7 @@ export class AuthService {
     
     return this.http.get<any>('http://localhost:4000/api/users/registro', { headers });
   }
-  
+
   recuperarContrasena(email: string): Observable<any> {
     return this.http.post<any>('http://localhost:4000/api/users//recuperar-contrasena', { email });
   }
@@ -80,5 +80,30 @@ export class AuthService {
   cambiarContrasena(token: string, newPassword: string): Observable<any> {
     return this.http.post<any>('http://localhost:4000/api/users/cambiar-contrasena', { token, newPassword });
   }
+
+  parseJwt(token: string): any {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      return JSON.parse(window.atob(base64));
+    } catch (error) {
+      return null;
+    }
+  }
+
+  obtenerRol(): string | null {
+    const token = this.getToken();
+    console.log('Token:', token); // Verifica si el token está presente
+    if (token) {
+      const decodedToken = this.parseJwt(token);
+      console.log('Decoded token:', decodedToken); // Verifica el token decodificado
+      return decodedToken ? decodedToken.rol : null;
+    }
+    return null;
+  }
+
+
+  
+
 
 }

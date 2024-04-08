@@ -34,7 +34,7 @@ exports.registro = async (req, res) => {
  }
 };
 
-
+/*
 exports.obtenerUser = async (req, res) =>{
   console.info('obtener Registro')
 
@@ -49,6 +49,23 @@ exports.obtenerUser = async (req, res) =>{
   } catch(error){
       console.log(error);
       res.status(500).send('Hubo un error');
+  }
+} */
+
+exports.obtenerUser = async (req, res) => {
+  console.info('obtener Registro')
+
+  try {
+    // Verificar el rol del usuario antes de permitir la operación
+    if (req.user && req.user.rol === 'administrador') {
+      const users = await User.find();
+      res.json(users);
+    } else {
+      return res.status(403).json({ mensaje: 'No tienes permiso para realizar esta acción' });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Hubo un error');
   }
 }
 
@@ -69,7 +86,8 @@ exports.inicioSesion = async (req, res) => {
       return res.status(401).json({ mensaje: 'Credenciales inválidas' });
     }
 
-    const token = jwt.sign({ usuarioId: usuario._id }, 'secreto', { expiresIn: '120s' });
+    // Generar un token JWT
+    const token = jwt.sign({ usuarioId: usuario._id, rol: usuario.rol }, 'secreto', { expiresIn: '120ms' });
 
     res.status(200).json({ mensaje: 'Inicio de sesión exitoso', token });
   } catch (error) {

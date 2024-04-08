@@ -1,0 +1,33 @@
+#seccion_header {
+    margin-bottom: 20px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-bottom: 15px;
+}
+
+hr {
+    color: #004b8d;
+    width:400px;
+    margin: auto;
+    text-align: center;
+    border-top: 5px solid;
+}
+
+h2{
+    text-align: center;
+    margin-top: 3%;
+    color: black;
+}
+
+p{
+    text-align: justify;
+    margin-top: 1%;
+    color: black;
+}
+

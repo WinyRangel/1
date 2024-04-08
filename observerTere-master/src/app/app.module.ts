@@ -44,6 +44,7 @@ import { FiltroPorPalabraClavePipePipe } from './components/header/search/filtro
 import { ProductosComponent } from './components/productos/productos.component';
 import { RecursoComponent } from './components/recurso/recurso.component';
 import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
+import { NosotrosComponent } from './components/nosotros/nosotros.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { SolicitudesComponent } from './components/solicitudes/solicitudes.compo
     FiltroPorPalabraClavePipePipe,
     ProductosComponent,
     RecursoComponent,
-    SolicitudesComponent  ],
+    SolicitudesComponent,
+    NosotrosComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
